@@ -2,6 +2,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize Lucide icons
     lucide.createIcons();
 
+    // Lenis smooth scrolling
+    const lenis = typeof Lenis !== 'undefined'
+        ? new Lenis({
+            duration: 1.1,
+            smoothWheel: true,
+            touchMultiplier: 1
+        })
+        : null;
+
+    if (lenis) {
+        const raf = (time) => {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        };
+        requestAnimationFrame(raf);
+    }
+
     // Scroll reveal animation
     const revealElements = document.querySelectorAll('.animate-up, .animate-left, .animate-right, .animate-fade-in');
     
@@ -24,10 +41,14 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                window.scrollTo({
-                    top: target.offsetTop - 80,
-                    behavior: 'smooth'
-                });
+                if (lenis) {
+                    lenis.scrollTo(target, { offset: -80 });
+                } else {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
             }
         });
     });
