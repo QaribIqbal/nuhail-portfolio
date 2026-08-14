@@ -21,7 +21,8 @@ export function Hero() {
   const projectMode = intent === "project";
 
   return (
-    <section className="shell grid items-start gap-10 py-8 lg:min-h-[calc(100dvh-4rem)] lg:grid-cols-[minmax(0,1.12fr)_minmax(28rem,.88fr)] lg:items-center lg:gap-14 lg:py-10">
+    <section className="shell relative grid items-start gap-10 overflow-hidden py-8 lg:min-h-[calc(100dvh-4rem)] lg:grid-cols-[minmax(0,1.12fr)_minmax(28rem,.88fr)] lg:items-center lg:gap-14 lg:py-10">
+      <div aria-hidden="true" className="system-atmosphere"><span className="signal-orb signal-orb-one" /><span className="signal-orb signal-orb-two" /><svg className="signal-paths" fill="none" viewBox="0 0 1200 760" xmlns="http://www.w3.org/2000/svg"><path d="M-80 570C140 430 265 705 480 520S790 250 1280 425" pathLength="1" /><path d="M-110 640C200 465 290 650 570 610S790 440 1260 500" pathLength="1" /></svg></div>
       <motion.div animate={{ opacity: 1, y: 0 }} initial={false} transition={{ duration: reduceMotion ? 0 : 0.6, ease: "easeOut" }} className="relative z-10 py-10 lg:py-16">
         <div className="mb-7 flex items-center gap-3 text-xs font-medium uppercase tracking-[.14em] text-[var(--text-muted)]">
           <span className="inline-flex h-2 w-2 rounded-full bg-[var(--signal)]" aria-hidden="true" />
@@ -55,22 +56,21 @@ export function Hero() {
           {site.availability}
         </p>
       </motion.div>
-      <motion.div animate={{ opacity: 1, scale: 1 }} initial={false} transition={{ duration: reduceMotion ? 0 : 0.7, delay: reduceMotion ? 0 : 0.14, ease: "easeOut" }} className="grid-field relative min-h-[31rem] overflow-hidden border border-[var(--line)] bg-[var(--surface)] p-4 shadow-[var(--shadow-soft)] md:p-7">
-        <Image alt="Abstract automation network" className="object-cover opacity-55" fill priority sizes="(min-width: 1024px) 42vw, 100vw" src="/media/nuhail-system-network.png" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,9,13,.32),rgba(7,9,13,.86))]" />
-        <div className="relative z-10">
+      <motion.div animate={{ opacity: 1, scale: 1 }} initial={false} transition={{ duration: reduceMotion ? 0 : 0.7, delay: reduceMotion ? 0 : 0.14, ease: "easeOut" }} className="grid-field relative min-h-[31rem] overflow-hidden border border-[var(--line)] bg-[var(--surface)] shadow-[var(--shadow-soft)]">
+        <Image alt="Portrait of Nuhail Iqbal" className="object-cover object-center" fill priority sizes="(min-width: 1024px) 42vw, 100vw" src="/media/nuhail-portrait-primary.png" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,9,13,.06),rgba(7,9,13,.78))]" />
+        <div className="absolute inset-x-4 bottom-4 z-10 bg-[rgba(7,9,13,.74)] p-4 backdrop-blur-md md:inset-x-7 md:bottom-7 md:p-5">
         <div className="mb-8 flex items-center justify-between border-b border-[var(--line)] pb-4">
           <p className="font-mono text-xs uppercase tracking-[.14em] text-[var(--text-muted)]">System sketch / 01</p>
           <GitBranch size={20} className="text-[var(--signal)]" weight="duotone" />
         </div>
-        <ol className="relative grid gap-4">
+        <ol className="relative grid grid-cols-2 gap-x-4 gap-y-3">
           {nodes.map(([index, title, detail], nodeIndex) => (
-            <li className="relative grid grid-cols-[2.5rem_1fr] gap-4" key={title}>
-              {nodeIndex < nodes.length - 1 ? <span className="absolute left-5 top-10 h-8 w-px bg-[var(--line-strong)]" aria-hidden="true" /> : null}
-              <span className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--line-strong)] bg-[var(--ink)] font-mono text-xs text-[var(--signal)]">{index}</span>
-              <div className="border-b border-[var(--line)] pb-5 pt-1 last:border-b-0">
-                <p className="font-medium tracking-tight">{title}</p>
-                <p className="mt-1 text-sm text-[var(--text-muted)]">{detail}</p>
+            <li className="grid grid-cols-[2rem_1fr] gap-2" key={title}>
+              <span className="signal-node flex h-8 w-8 items-center justify-center rounded-full border border-[var(--line-strong)] bg-[var(--ink)] font-mono text-[10px] text-[var(--signal)]" style={{ animationDelay: `${nodeIndex * 1.1}s` }}>{index}</span>
+              <div className="min-w-0 pt-0.5">
+                <p className="text-sm font-medium tracking-tight">{title}</p>
+                <p className="mt-0.5 truncate text-xs text-[var(--text-muted)]">{detail}</p>
               </div>
             </li>
           ))}

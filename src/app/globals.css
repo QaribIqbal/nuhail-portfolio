@@ -55,6 +55,20 @@ button, a { -webkit-tap-highlight-color: transparent; }
   background-size: 32px 32px;
 }
 
+.system-atmosphere { position: absolute; inset: 0; pointer-events: none; overflow: hidden; opacity: .62; }
+.signal-orb { position: absolute; border-radius: 999px; background: var(--signal); filter: blur(34px); opacity: .16; will-change: transform; animation: orbit 15s ease-in-out infinite alternate; }
+.signal-orb-one { width: 17rem; height: 17rem; right: 8%; top: 10%; }
+.signal-orb-two { width: 11rem; height: 11rem; left: 28%; bottom: 8%; animation-delay: -7s; }
+.signal-paths { position: absolute; width: 100%; height: 100%; inset: 0; overflow: visible; }
+.signal-paths path { stroke: rgba(121, 230, 163, .42); stroke-width: 1.25; stroke-dasharray: .014 .035; stroke-dashoffset: 1; animation: flow 12s linear infinite; }
+.signal-paths path + path { animation-delay: -6s; opacity: .6; }
+.signal-node { animation: node-pulse 4.4s ease-in-out infinite; }
+.portrait-secondary { transition: transform 600ms cubic-bezier(.2,.7,.2,1), border-color 300ms ease; }
+.portrait-secondary:hover { transform: translateY(-5px) rotate(-.5deg); border-color: rgba(121,230,163,.7); }
+@keyframes orbit { from { transform: translate3d(-18px, -12px, 0) scale(.92); } to { transform: translate3d(28px, 22px, 0) scale(1.12); } }
+@keyframes flow { to { stroke-dashoffset: 0; } }
+@keyframes node-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(121,230,163,0); } 45% { box-shadow: 0 0 0 6px rgba(121,230,163,.18); } }
+
 .ticker-track { animation: ticker 32s linear infinite; }
 .ticker-track:hover { animation-play-state: paused; }
 @keyframes ticker { to { transform: translateX(-50%); } }
