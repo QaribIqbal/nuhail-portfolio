@@ -45,6 +45,17 @@ test("a direct work link remains aligned after the responsive layout settles", a
   await expect(page.getByRole("img", { name: /real-estate automation workflow/i })).toHaveAttribute("loading", "eager");
 });
 
+test("hash navigation is reapplied after hydration", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Need automation" }).click();
+  await page.evaluate(() => {
+    history.replaceState(null, "", "/?intent=hire#work");
+    window.dispatchEvent(new HashChangeEvent("hashchange"));
+  });
+
+  await expect.poll(async () => page.locator("#work").evaluate((element) => Math.abs(element.getBoundingClientRect().top - 64))).toBeLessThan(8);
+});
+
 test("supporting content uses compact horizontal rails on mobile", async ({ page, isMobile }) => {
   test.skip(!isMobile, "The compact rails apply below the desktop breakpoint.");
   await page.goto("/");

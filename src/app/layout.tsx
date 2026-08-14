@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { IntentProvider } from "@/components/site/intent-provider";
+import { HashScrollManager } from "@/components/site/hash-scroll-manager";
 import "./globals.css";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
@@ -19,6 +20,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <a className="skip-link" href="#main-content">
           Skip to content
         </a>
+        <HashScrollManager />
         <IntentProvider>{children}</IntentProvider>
       </body>
     </html>
