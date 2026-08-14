@@ -9,5 +9,5 @@ const steps = [
 ] as const;
 
 export function Process() {
-  return <section className="shell py-16 md:py-24" id="process"><SectionHeading eyebrow="DELIVERY LOOP" title="Map carefully. Build narrowly. Handoff clearly." /><ol className="mt-12 grid gap-px border border-[var(--line)] bg-[var(--line)] md:grid-cols-5">{steps.map(([number, title, copy]) => <li className="bg-[var(--ink)] p-6" key={number}><p className="font-mono text-xs text-[var(--signal)]">{number}</p><h3 className="mt-12 text-2xl font-semibold tracking-[-0.04em]">{title}</h3><p className="mt-3 text-sm leading-6 text-[var(--text-muted)]">{copy}</p></li>)}</ol></section>;
+  return <section className="shell py-16 md:py-24" id="process"><SectionHeading eyebrow="DELIVERY LOOP" title="Map carefully. Build narrowly. Handoff clearly." /><ol aria-label="Delivery process" className="horizontal-rail mt-12 flex snap-x snap-mandatory gap-px overflow-x-auto border border-[var(--line)] bg-[var(--line)] md:grid md:grid-cols-5" tabIndex={0}>{steps.map(([number, title, copy]) => <li className="w-[82%] shrink-0 snap-start bg-[var(--ink)] p-6 md:w-auto" key={number}><p className="font-mono text-xs text-[var(--signal)]">{number}</p><h3 className="mt-12 text-2xl font-semibold tracking-[-0.04em]">{title}</h3><p className="mt-3 text-sm leading-6 text-[var(--text-muted)]">{copy}</p></li>)}</ol></section>;
 }

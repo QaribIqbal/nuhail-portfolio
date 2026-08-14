@@ -31,6 +31,8 @@ body {
 
 a { color: inherit; }
 
+section[id] { scroll-margin-top: 4rem; }
+
 button, a { -webkit-tap-highlight-color: transparent; }
 
 .button-primary { background: var(--signal); color: var(--ink); }
@@ -65,6 +67,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .signal-node { animation: node-pulse 4.4s ease-in-out infinite; }
 .portrait-secondary { transition: transform 600ms cubic-bezier(.2,.7,.2,1), border-color 300ms ease; }
 .portrait-secondary:hover { transform: translateY(-5px) rotate(-.5deg); border-color: rgba(121,230,163,.7); }
+.horizontal-rail { scrollbar-width: none; }
+.horizontal-rail::-webkit-scrollbar { display: none; }
 @keyframes orbit { from { transform: translate3d(-18px, -12px, 0) scale(.92); } to { transform: translate3d(28px, 22px, 0) scale(1.12); } }
 @keyframes flow { to { stroke-dashoffset: 0; } }
 @keyframes node-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(121,230,163,0); } 45% { box-shadow: 0 0 0 6px rgba(121,230,163,.18); } }

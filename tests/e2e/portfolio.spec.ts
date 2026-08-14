@@ -36,3 +36,24 @@ test("the home page has no serious or critical accessibility violations", async 
   const materialViolations = results.violations.filter((violation) => ["serious", "critical"].includes(violation.impact ?? ""));
   expect(materialViolations).toEqual([]);
 });
+
+test("a direct work link remains aligned after the responsive layout settles", async ({ page }) => {
+  await page.goto("/?intent=hire#work");
+  await page.waitForLoadState("load");
+
+  await expect.poll(async () => page.locator("#work").evaluate((element) => Math.abs(element.getBoundingClientRect().top - 64))).toBeLessThan(8);
+  await expect(page.getByRole("img", { name: /real-estate automation workflow/i })).toHaveAttribute("loading", "eager");
+});
+
+test("supporting content uses compact horizontal rails on mobile", async ({ page, isMobile }) => {
+  test.skip(!isMobile, "The compact rails apply below the desktop breakpoint.");
+  await page.goto("/");
+
+  const supportingProjects = page.getByRole("region", { name: "Supporting projects" });
+  const deliveryProcess = page.getByRole("list", { name: "Delivery process" });
+
+  await expect(supportingProjects).toBeVisible();
+  await expect(deliveryProcess).toBeVisible();
+  expect(await supportingProjects.evaluate((element) => element.scrollWidth > element.clientWidth)).toBe(true);
+  expect(await deliveryProcess.evaluate((element) => element.scrollWidth > element.clientWidth)).toBe(true);
+});
