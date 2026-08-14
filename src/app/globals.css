@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #07090d;
+  --surface: #0d1117;
+  --surface-soft: #131922;
+  --text: #f4f7fb;
+  --text-muted: #a8b0be;
+  --signal: #79e6a3;
+  --line: rgba(255, 255, 255, 0.1);
+  --line-strong: rgba(255, 255, 255, 0.18);
+  --shadow-soft: 0 24px 80px rgba(0, 0, 0, 0.28);
+  --content: 1240px;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; background: var(--ink); }
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(circle at 84% 8%, rgba(121, 230, 163, 0.09), transparent 24rem),
+    var(--ink);
+  color: var(--text);
+  font-family: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+a { color: inherit; }
+
+button, a { -webkit-tap-highlight-color: transparent; }
+
+.button-primary { background: var(--signal); color: var(--ink); }
+.button-primary svg { color: currentColor; }
+
+.shell { width: min(var(--content), calc(100% - 2rem)); margin-inline: auto; }
+
+.eyebrow {
+  margin: 0;
+  color: var(--signal);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.grid-field {
+  background-image:
+    linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.skip-link {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 100;
+  transform: translateY(-200%);
+  border-radius: 999px;
+  background: var(--signal);
+  color: var(--ink);
+  padding: .7rem 1rem;
+  font-weight: 700;
+}
+
+.skip-link:focus { transform: translateY(0); outline: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  body { background: white; color: black; }
+  nav, video, iframe, .no-print { display: none !important; }
+  .shell { width: 100%; }
+}
