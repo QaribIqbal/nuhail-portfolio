@@ -13,9 +13,21 @@ function scrollToCurrentHash() {
 
 export function HashScrollManager() {
   useEffect(() => {
-    scrollToCurrentHash();
-    window.addEventListener("hashchange", scrollToCurrentHash);
-    return () => window.removeEventListener("hashchange", scrollToCurrentHash);
+    let correctionTimer: number | undefined;
+    const scheduleScroll = () => {
+      window.clearTimeout(correctionTimer);
+      scrollToCurrentHash();
+      correctionTimer = window.setTimeout(scrollToCurrentHash, 400);
+    };
+
+    scheduleScroll();
+    window.addEventListener("hashchange", scheduleScroll);
+    window.addEventListener("load", scheduleScroll);
+    return () => {
+      window.clearTimeout(correctionTimer);
+      window.removeEventListener("hashchange", scheduleScroll);
+      window.removeEventListener("load", scheduleScroll);
+    };
   }, []);
 
   return null;

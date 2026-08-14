@@ -56,6 +56,13 @@ test("hash navigation is reapplied after hydration", async ({ page }) => {
   await expect.poll(async () => page.locator("#work").evaluate((element) => Math.abs(element.getBoundingClientRect().top - 64))).toBeLessThan(8);
 });
 
+test("the hash target recovers from a post-hydration scroll reset", async ({ page }) => {
+  await page.goto("/?intent=hire#work");
+  await page.evaluate(() => window.setTimeout(() => window.scrollTo(0, 0), 100));
+
+  await expect.poll(async () => page.locator("#work").evaluate((element) => Math.abs(element.getBoundingClientRect().top - 64))).toBeLessThan(8);
+});
+
 test("supporting content uses compact horizontal rails on mobile", async ({ page, isMobile }) => {
   test.skip(!isMobile, "The compact rails apply below the desktop breakpoint.");
   await page.goto("/");
