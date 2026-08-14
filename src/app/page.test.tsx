@@ -18,5 +18,8 @@ describe("home page", () => {
       }),
     ).toBeVisible();
     expect(screen.getByText("AI Automation Engineer")).toBeVisible();
+    expect(screen.getByRole("img", { name: /abstract automation network/i })).toBeVisible();
+    expect(screen.getByRole("img", { name: /real-estate automation workflow/i })).toBeVisible();
+    expect(screen.getByRole("img", { name: /agency reporting workflow/i })).toBeVisible();
   });
 });

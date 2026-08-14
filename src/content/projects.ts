@@ -25,6 +25,7 @@ export const caseStudies: readonly CaseStudy[] = [
     safeguards: ["Use approved knowledge and scripts.", "Escalate uncertain or unusual requests.", "Preserve captured requirements during handoff.", "Confirm availability before booking."],
     potentialImpact: ["Fewer inquiries left unanswered after hours.", "Faster first response during busy periods.", "More complete requirements before an agent joins.", "Less repetitive qualification and scheduling work."],
     sourceLink: { label: "Read the original real-estate case study", href: realEstateSource },
+    media: { src: "/media/real-estate-flow.png", alt: "Abstract real-estate automation workflow with signals routed through qualification and handoff" },
     embed: { provider: "youtube", src: "https://www.youtube-nocookie.com/embed/0vO8tecumK8", title: "Real-estate voice-agent demonstration" },
   },
   {
@@ -48,6 +49,7 @@ export const caseStudies: readonly CaseStudy[] = [
     safeguards: ["Validate the recipient against the client record.", "Flag incomplete source data.", "Preserve the values used for a report.", "Route delivery exceptions to a human owner."],
     potentialImpact: ["Fewer repetitive reporting steps every week.", "More consistent delivery at the promised time.", "Clearer client-specific communication.", "Better internal visibility after reports are sent."],
     sourceLink: { label: "Read the original agency case study", href: agencySource },
+    media: { src: "/media/agency-reporting-flow.png", alt: "Abstract agency reporting workflow with data routed into scheduled delivery" },
     embed: { provider: "loom", src: "https://www.loom.com/embed/f7560adbec7841ca809a84e5d638c4f8", title: "Weekly client reporting automation demonstration" },
   },
 ];

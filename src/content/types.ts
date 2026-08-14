@@ -50,6 +50,12 @@ export type Project = {
   featured: boolean;
 };
 
+export type ProjectMedia = {
+  src: `/media/${string}`;
+  alt: string;
+  priority?: boolean;
+};
+
 export type CaseStudy = Project & {
   challenge: readonly string[];
   systemSummary: string;
@@ -57,5 +63,6 @@ export type CaseStudy = Project & {
   safeguards: readonly string[];
   potentialImpact: readonly string[];
   sourceLink: ExternalLink;
+  media: ProjectMedia;
   embed?: { provider: "youtube" | "loom"; src: string; title: string };
 };

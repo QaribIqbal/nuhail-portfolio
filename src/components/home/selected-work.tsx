@@ -1,20 +1,21 @@
 import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
+import Image from "next/image";
 import { SectionHeading } from "@/components/site/section-heading";
 import { caseStudies, supportingProjects } from "@/content/projects";
 
-function ProjectDiagram({ index }: { index: number }) {
-  return <div aria-hidden="true" className="grid-field relative min-h-48 overflow-hidden border-b border-[var(--line)] p-6"><span className="absolute left-6 top-6 font-mono text-xs text-[var(--signal)]">0{index + 1} / SYSTEM</span><span className="absolute bottom-9 left-7 h-3 w-3 rounded-full bg-[var(--signal)]" /><span className="absolute bottom-10 left-12 h-px w-[44%] bg-[var(--signal)]" /><span className="absolute bottom-7 left-[58%] h-8 w-8 border border-[var(--signal)] bg-[var(--ink)]" /></div>;
+function ProjectDiagram({ index, src, alt }: { index: number; src: string; alt: string }) {
+  return <div className="grid-field relative aspect-[16/8.5] overflow-hidden border-b border-[var(--line)]"><Image alt={alt} className="object-cover opacity-70 transition duration-700 group-hover:scale-[1.045] group-hover:opacity-90" fill sizes="(min-width: 1024px) 58vw, 100vw" src={src} /><span className="absolute inset-0 bg-[linear-gradient(0deg,rgba(7,9,13,.55),transparent_65%)]" /><span className="absolute left-6 top-6 font-mono text-xs text-[var(--signal)]">0{index + 1} / SYSTEM</span></div>;
 }
 
 export function SelectedWork() {
   return (
-    <section className="shell py-24 md:py-36" id="work">
+    <section className="shell py-16 md:py-24" id="work">
       <SectionHeading eyebrow="SELECTED SYSTEMS" title="Proof lives in the workflow." description="Agents, automations, and product experiments presented with their real evidence level." />
       <div className="mt-12 grid gap-5 lg:grid-cols-[1.16fr_.84fr]">
         {caseStudies.map((project, index) => (
-          <article className="group overflow-hidden border border-[var(--line)] bg-[var(--surface)]" key={project.slug}>
-            <ProjectDiagram index={index} />
+          <article className="group overflow-hidden border border-[var(--line)] bg-[var(--surface)] transition duration-500 hover:-translate-y-1 hover:border-[var(--line-strong)]" key={project.slug}>
+            <ProjectDiagram alt={project.media.alt} index={index} src={project.media.src} />
             <div className="p-6 md:p-8">
               <p className="eyebrow">{project.status}</p>
               <h3 className="mt-4 text-3xl font-semibold tracking-[-0.045em]">{project.title}</h3>

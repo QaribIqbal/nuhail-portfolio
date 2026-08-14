@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { caseStudies } from "@/content/projects";
 import { sourceLedger } from "@/content/source-ledger";
 import { site } from "@/content/site";
 
@@ -18,5 +19,12 @@ describe("content evidence", () => {
 
   it("labels the shared calendar accurately", () => {
     expect(site.links.audit.label).toBe("Book a TechBees Automation Audit");
+  });
+
+  it("provides locally hosted editorial media for each case study", () => {
+    for (const caseStudy of caseStudies) {
+      expect(caseStudy.media.src).toMatch(/^\/media\//);
+      expect(caseStudy.media.alt).toMatch(/automation|workflow|reporting/i);
+    }
   });
 });
