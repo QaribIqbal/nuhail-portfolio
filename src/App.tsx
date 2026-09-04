@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Lenis from "lenis";
 import { BackgroundScrub } from "./components/BackgroundScrub";
 import { Navbar } from "./components/Navbar";
@@ -10,6 +10,7 @@ import { OpeningsSection } from "./components/sections/OpeningsSection";
 import { ShopSection } from "./components/sections/ShopSection";
 import { Footer } from "./components/sections/Footer";
 import { CursorFollower } from "./components/ui/cursor-follower";
+import { PremiumLoader } from "./components/ui/PremiumLoader";
 
 // Whitespace pause — pattern interrupt between "How I Work" and "Studio".
 // One centered sentence, generous vertical space. The emptiness is the effect.
@@ -28,6 +29,17 @@ const WhitespacePause: React.FC = () => (
 );
 
 export const App: React.FC = () => {
+  const [loadProgress, setLoadProgress] = useState(0);
+  const [isInitialReady, setIsInitialReady] = useState(false);
+
+  const handleProgress = useCallback((progress: number) => {
+    setLoadProgress(progress);
+  }, []);
+
+  const handleInitialReady = useCallback(() => {
+    setIsInitialReady(true);
+  }, []);
+
   // Initialize Lenis smooth scroll
   useEffect(() => {
     const lenis = new Lenis({
@@ -69,11 +81,20 @@ export const App: React.FC = () => {
 
   return (
     <div className="relative min-h-screen w-full bg-black text-white font-body selection:bg-white selection:text-black">
-      {/* Interactive cursor follower */}
+      {/* Editorial Premium System Initialization Loader */}
+      <PremiumLoader
+        progress={loadProgress}
+        isReady={isInitialReady}
+      />
+
+      {/* Hardware-accelerated cursor follower */}
       <CursorFollower />
 
-      {/* Background image sequence scrubbed by mouse in hero */}
-      <BackgroundScrub />
+      {/* Background image sequence scrubbed by mouse on Canvas */}
+      <BackgroundScrub
+        onLoadProgress={handleProgress}
+        onInitialReady={handleInitialReady}
+      />
 
       {/* Top fixed navigation */}
       <Navbar />

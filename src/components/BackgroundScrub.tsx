@@ -1,85 +1,168 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 
 const TOTAL_FRAMES = 142;
 
-// Helper to format frame path to lightweight, high-fidelity WebP
 const getFrameUrl = (index: number) => {
   const frameNum = String(index + 1).padStart(3, "0");
   return `/media/frames-webp/ezgif-frame-${frameNum}.webp`;
 };
 
-export const BackgroundScrub: React.FC = () => {
-  const imgRef = useRef<HTMLImageElement | null>(null);
-  const cacheRef = useRef<(HTMLImageElement | null)[]>(new Array(TOTAL_FRAMES).fill(null));
+interface BackgroundScrubProps {
+  onLoadProgress?: (progress: number) => void;
+  onInitialReady?: () => void;
+}
+
+export const BackgroundScrub: React.FC<BackgroundScrubProps> = ({
+  onLoadProgress,
+  onInitialReady,
+}) => {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const imagesRef = useRef<(HTMLImageElement | null)[]>(new Array(TOTAL_FRAMES).fill(null));
   const isLoadedRef = useRef<boolean[]>(new Array(TOTAL_FRAMES).fill(false));
+  const loadedCountRef = useRef<number>(0);
+
   const targetFrameRef = useRef<number>(0);
   const currentFrameRef = useRef<number>(0);
   const animationFrameIdRef = useRef<number | null>(null);
 
-  const [currentSrc, setCurrentSrc] = useState<string>(getFrameUrl(0));
-
-  // Prioritized 3-tier progressive preloading
+  // Optimized parallel preloading with milestone-first strategy
   useEffect(() => {
     let isCancelled = false;
 
-    const loadSingleFrame = (idx: number): Promise<void> => {
+    const notifyProgress = () => {
+      const pct = Math.min(100, Math.round((loadedCountRef.current / TOTAL_FRAMES) * 100));
+      if (onLoadProgress) onLoadProgress(pct);
+    };
+
+    const loadFrame = (idx: number): Promise<HTMLImageElement> => {
       return new Promise((resolve) => {
-        if (isLoadedRef.current[idx] && cacheRef.current[idx]) {
-          resolve();
+        if (imagesRef.current[idx] && isLoadedRef.current[idx]) {
+          resolve(imagesRef.current[idx]!);
           return;
         }
+
         const img = new Image();
-        img.src = getFrameUrl(idx);
         img.decoding = "async";
-        cacheRef.current[idx] = img;
+        img.src = getFrameUrl(idx);
+
         img.onload = () => {
-          isLoadedRef.current[idx] = true;
-          resolve();
+          if (!isCancelled) {
+            imagesRef.current[idx] = img;
+            if (!isLoadedRef.current[idx]) {
+              isLoadedRef.current[idx] = true;
+              loadedCountRef.current += 1;
+              notifyProgress();
+            }
+            resolve(img);
+          }
         };
+
         img.onerror = () => {
-          resolve();
+          if (!isCancelled) {
+            loadedCountRef.current += 1;
+            notifyProgress();
+            resolve(img);
+          }
         };
       });
     };
 
-    const runProgressivePreload = async () => {
-      // Tier 1: Preload initial frame immediately
-      await loadSingleFrame(0);
+    const preloadAll = async () => {
+      // 1. Critical Phase: Load Frame 0 and immediately draw to canvas
+      const firstImg = await loadFrame(0);
+      if (isCancelled) return;
+      drawFrame(firstImg);
+      if (onInitialReady) onInitialReady();
+
+      // 2. High-Priority Keyframes across full arc (0, 10, 20, ..., 141)
+      const keyframeIndices: number[] = [];
+      for (let i = 0; i < TOTAL_FRAMES; i += 8) {
+        if (!isLoadedRef.current[i]) keyframeIndices.push(i);
+      }
+      if (!isLoadedRef.current[141]) keyframeIndices.push(141);
+
+      await Promise.all(keyframeIndices.map((idx) => loadFrame(idx)));
       if (isCancelled) return;
 
-      // Tier 2: Preload 8 milestone keyframes across the sequence
-      // Ensures instant guideposts if the user scrubs immediately
-      const milestones = [20, 40, 60, 80, 100, 120, 141];
-      await Promise.all(milestones.map((idx) => loadSingleFrame(idx)));
-      if (isCancelled) return;
-
-      // Tier 3: Stream the remaining in-between frames in gentle batches
-      const remainingIndices: number[] = [];
-      for (let i = 1; i < TOTAL_FRAMES; i++) {
-        if (!isLoadedRef.current[i]) {
-          remainingIndices.push(i);
-        }
+      // 3. Stream all remaining frames in parallel batches of 10
+      const remaining: number[] = [];
+      for (let i = 0; i < TOTAL_FRAMES; i++) {
+        if (!isLoadedRef.current[i]) remaining.push(i);
       }
 
-      const BATCH_SIZE = 8;
-      for (let i = 0; i < remainingIndices.length; i += BATCH_SIZE) {
+      const BATCH = 10;
+      for (let i = 0; i < remaining.length; i += BATCH) {
         if (isCancelled) return;
-        const batch = remainingIndices.slice(i, i + BATCH_SIZE);
-        await Promise.all(batch.map((idx) => loadSingleFrame(idx)));
-        // Yield 20ms to browser main thread
-        await new Promise((r) => setTimeout(r, 20));
+        const batch = remaining.slice(i, i + BATCH);
+        await Promise.all(batch.map((idx) => loadFrame(idx)));
       }
     };
 
-    runProgressivePreload();
+    preloadAll();
 
     return () => {
       isCancelled = true;
     };
+  }, [onLoadProgress, onInitialReady]);
+
+  // Direct Hardware-Accelerated Canvas Drawing
+  const drawFrame = (img: HTMLImageElement | null) => {
+    const canvas = canvasRef.current;
+    if (!canvas || !img || !img.complete || img.naturalWidth === 0) return;
+
+    const ctx = canvas.getContext("2d", { alpha: false });
+    if (!ctx) return;
+
+    const cw = canvas.width;
+    const ch = canvas.height;
+    const iw = img.naturalWidth;
+    const ih = img.naturalHeight;
+
+    // Cover positioning centered at 82% X (matching hero layout)
+    const scale = Math.max(cw / iw, ch / ih);
+    const renderWidth = iw * scale;
+    const renderHeight = ih * scale;
+
+    const targetX = (cw - renderWidth) * 0.82;
+    const targetY = (ch - renderHeight) * 0.5;
+
+    ctx.drawImage(img, targetX, targetY, renderWidth, renderHeight);
+  };
+
+  // Canvas resize handler (matching device pixel ratio)
+  useEffect(() => {
+    const updateSize = () => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+
+      if (canvas.width !== w * dpr || canvas.height !== h * dpr) {
+        canvas.width = w * dpr;
+        canvas.height = h * dpr;
+        const ctx = canvas.getContext("2d", { alpha: false });
+        if (ctx) {
+          ctx.scale(dpr, dpr);
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = "high";
+        }
+      }
+
+      // Redraw current frame
+      const currentIdx = Math.max(
+        0,
+        Math.min(TOTAL_FRAMES - 1, Math.round(currentFrameRef.current))
+      );
+      drawFrame(imagesRef.current[currentIdx] || imagesRef.current[0]);
+    };
+
+    updateSize();
+    window.addEventListener("resize", updateSize, { passive: true });
+    return () => window.removeEventListener("resize", updateSize);
   }, []);
 
-  // Map cursor X position directly across viewport so moving cursor to the right
-  // smoothly plays all images all the way to the very end (frame 142)
+  // Scrub interaction tracking (mouse + touch)
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       const windowWidth = window.innerWidth || 1;
@@ -89,7 +172,6 @@ export const BackgroundScrub: React.FC = () => {
         0,
         Math.min(1, (e.clientX - padding) / effectiveWidth)
       );
-
       targetFrameRef.current = normalizedX * (TOTAL_FRAMES - 1);
     };
 
@@ -103,11 +185,10 @@ export const BackgroundScrub: React.FC = () => {
         0,
         Math.min(1, (touchX - padding) / effectiveWidth)
       );
-
       targetFrameRef.current = normalizedX * (TOTAL_FRAMES - 1);
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
     window.addEventListener("touchmove", handleTouchMove, { passive: true });
 
     return () => {
@@ -116,15 +197,16 @@ export const BackgroundScrub: React.FC = () => {
     };
   }, []);
 
-  // Smooth 60fps render loop with natural momentum / lerp
+  // 60FPS RAF Loop with Nearest Loaded Frame Fallback
   useEffect(() => {
-    let lastRenderedFrame = 0;
+    let lastRenderedFrame = -1;
 
     const render = () => {
       const diff = targetFrameRef.current - currentFrameRef.current;
 
-      if (Math.abs(diff) > 0.05) {
-        currentFrameRef.current += diff * 0.35;
+      // Snappy, silky smooth responsiveness
+      if (Math.abs(diff) > 0.04) {
+        currentFrameRef.current += diff * 0.4;
       } else {
         currentFrameRef.current = targetFrameRef.current;
       }
@@ -134,7 +216,7 @@ export const BackgroundScrub: React.FC = () => {
         Math.min(TOTAL_FRAMES - 1, Math.round(currentFrameRef.current))
       );
 
-      // Closest loaded frame lookup prevents any blank/flickering frames
+      // Find nearest loaded frame if current isn't in memory yet
       if (!isLoadedRef.current[frameIdx]) {
         for (let offset = 1; offset < TOTAL_FRAMES; offset++) {
           const left = frameIdx - offset;
@@ -152,11 +234,8 @@ export const BackgroundScrub: React.FC = () => {
 
       if (frameIdx !== lastRenderedFrame) {
         lastRenderedFrame = frameIdx;
-        const newSrc = getFrameUrl(frameIdx);
-        if (imgRef.current) {
-          imgRef.current.src = newSrc;
-        }
-        setCurrentSrc(newSrc);
+        const img = imagesRef.current[frameIdx] || imagesRef.current[0];
+        drawFrame(img);
       }
 
       animationFrameIdRef.current = requestAnimationFrame(render);
@@ -180,24 +259,18 @@ export const BackgroundScrub: React.FC = () => {
         zIndex: 0,
       }}
     >
-      <img
-        ref={imgRef}
-        src={currentSrc}
-        alt="Mainframe Background"
-        decoding="sync"
-        loading="eager"
+      <canvas
+        ref={canvasRef}
         className="w-full h-full object-cover pointer-events-none select-none"
         style={{
           width: "100%",
           height: "100%",
-          objectFit: "cover",
-          objectPosition: "82% center",
-          imageRendering: "auto",
+          display: "block",
           transform: "translateZ(0)",
           WebkitBackfaceVisibility: "hidden",
         }}
       />
-      {/* Dark radial/horizontal gradient scrim behind text on left to guarantee 100% crisp legibility */}
+      {/* Dark radial/horizontal gradient scrim behind text on left */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
