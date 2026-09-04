@@ -118,12 +118,21 @@ export const BackgroundScrub: React.FC<BackgroundScrubProps> = ({
     const iw = img.naturalWidth;
     const ih = img.naturalHeight;
 
-    // Cover positioning centered at 82% X (matching hero layout)
+    // Reset transform to 1:1 canvas buffer coordinates
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high";
+
+    // Cover sizing
     const scale = Math.max(cw / iw, ch / ih);
     const renderWidth = iw * scale;
     const renderHeight = ih * scale;
 
-    const targetX = (cw - renderWidth) * 0.82;
+    const isMobile = window.innerWidth < 768;
+    // On desktop (screen >= 768px), shift slightly right (12% of viewport) so hero text has breathing room
+    // On mobile, keep centered
+    const desktopShift = isMobile ? 0 : cw * 0.12;
+    const targetX = (cw - renderWidth) * 0.5 + desktopShift;
     const targetY = (ch - renderHeight) * 0.5;
 
     ctx.drawImage(img, targetX, targetY, renderWidth, renderHeight);
@@ -138,15 +147,12 @@ export const BackgroundScrub: React.FC<BackgroundScrubProps> = ({
       const w = window.innerWidth;
       const h = window.innerHeight;
 
-      if (canvas.width !== w * dpr || canvas.height !== h * dpr) {
-        canvas.width = w * dpr;
-        canvas.height = h * dpr;
-        const ctx = canvas.getContext("2d", { alpha: false });
-        if (ctx) {
-          ctx.scale(dpr, dpr);
-          ctx.imageSmoothingEnabled = true;
-          ctx.imageSmoothingQuality = "high";
-        }
+      const targetW = Math.round(w * dpr);
+      const targetH = Math.round(h * dpr);
+
+      if (canvas.width !== targetW || canvas.height !== targetH) {
+        canvas.width = targetW;
+        canvas.height = targetH;
       }
 
       // Redraw current frame
@@ -270,12 +276,12 @@ export const BackgroundScrub: React.FC<BackgroundScrubProps> = ({
           WebkitBackfaceVisibility: "hidden",
         }}
       />
-      {/* Dark radial/horizontal gradient scrim behind text on left */}
+      {/* Dark radial/horizontal & vertical gradient scrim behind text to guarantee crisp legibility across viewports */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.70) 35%, rgba(0,0,0,0.30) 60%, rgba(0,0,0,0) 100%)",
+            "linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.65) 40%, rgba(0,0,0,0.15) 70%, rgba(0,0,0,0) 100%), linear-gradient(to top, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.60) 45%, rgba(0,0,0,0) 80%)",
         }}
       />
     </div>
