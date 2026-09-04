@@ -3,15 +3,16 @@ import { useTypewriter } from "../hooks/useTypewriter";
 
 export const HeroSection: React.FC = () => {
   const [isRevealed, setIsRevealed] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const touchedLeftRef = useRef(false);
   const touchedRightRef = useRef(false);
 
-  // Typewriter starts when revealed - Outcome headline from Blueprint
+  // Typewriter starts when revealed
   const typewriterText =
-    "I build 24/7 autonomous booking engines that recover missed calls and capture hot leads in under 60 seconds.";
+    "Glad you stopped in. Good taste tends to find me. Now, what are we building?";
   const { displayed, done } = useTypewriter(isRevealed ? typewriterText : "", {
-    speed: 30,
+    speed: 36,
     startDelay: 250,
   });
 
@@ -89,42 +90,42 @@ export const HeroSection: React.FC = () => {
   };
 
   const pillButtons = [
-    { label: "Pitch an idea", href: "#openings" },
-    { label: "Work with me", href: "#openings" },
-    { label: "Send a brief hello", href: "mailto:hello@mainframe.co" },
-    { label: "See how I work", href: "#process" },
+    { label: "Pitch an idea", href: "#openings", primary: true },
+    { label: "Work with me", href: "#openings", primary: false },
+    { label: "Send a brief hello", href: "mailto:hello@mainframe.co", primary: false },
+    { label: "See how I work", href: "#process", primary: false },
   ];
 
   return (
     <section
       className="relative z-1 h-screen w-full flex flex-col justify-end pb-12 md:justify-center md:pb-0 px-5 sm:px-8 md:px-12 overflow-hidden"
       style={{ zIndex: 1 }}
+      aria-label="Hero Introduction"
     >
       <div className="max-w-xl lg:max-w-2xl relative z-10 w-full">
-        {/* 1. Kicker / Micro-anchor badge */}
+        {/* 1. Kicker badge */}
         <div
-          className="pointer-events-none select-none mb-3 sm:mb-4 inline-flex items-center gap-2"
+          className="pointer-events-none select-none mb-3 sm:mb-4 inline-flex items-center gap-2 font-mono"
           style={{
             fontSize: "clamp(11px, 2vw, 13px)",
             lineHeight: 1.4,
-            fontWeight: 600,
-            letterSpacing: "0.12em",
+            letterSpacing: "0.1em",
             textTransform: "uppercase",
-            color: "rgba(255, 255, 255, 0.9)",
+            color: "var(--text-dim)",
           }}
         >
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse inline-block" />
-          <span>AI SYSTEMS & LEAD-TO-BOOKING ARCHITECT</span>
+          <span>Hey there, meet A.R.I.A — Adaptive Response Interface Agent</span>
         </div>
 
-        {/* 2. Typewriter headline (revealed via cursor sweep or timer) */}
+        {/* 2. Typewriter headline */}
         <h1
-          className="mb-4 sm:mb-5 transition-opacity duration-500 font-heading text-white font-medium drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]"
+          className="mb-4 sm:mb-5 transition-opacity duration-500 font-heading text-white font-medium drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]"
           style={{
-            fontSize: "clamp(22px, 3.2vw, 36px)",
-            lineHeight: 1.25,
+            fontSize: "clamp(24px, 3.4vw, 40px)",
+            lineHeight: 1.2,
             letterSpacing: "-0.02em",
-            minHeight: "84px",
+            minHeight: "72px",
             opacity: isRevealed ? 1 : 0,
           }}
         >
@@ -137,19 +138,19 @@ export const HeroSection: React.FC = () => {
           )}
         </h1>
 
-        {/* 3. Sub-headline (The Mechanism) - High contrast white/neutral-200 */}
+        {/* 3. Subheading — first person, dry editorial tone */}
         <p
-          className="text-[15px] sm:text-[17px] text-neutral-200 max-w-lg lg:max-w-xl mb-6 leading-relaxed font-normal transition-all drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
+          className="text-[15px] sm:text-[17px] text-[var(--text-muted)] max-w-lg mb-6 leading-relaxed font-normal transition-all drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
           style={{
             opacity: isRevealed ? 1 : 0,
             transform: isRevealed ? "translateY(0)" : "translateY(8px)",
             transition: "opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s",
           }}
         >
-          Stop bleeding high-intent customers to your competitors. I install custom AI voice receptionists and instant SMS missed-call text-backs that turn dropped calls into booked calendar appointments on autopilot.
+          I design, build, and run AI automation systems that actually work — exception handling, testing, and handoffs included.
         </p>
 
-        {/* 4. Action CTAs + Micro-anchor */}
+        {/* 4. Action CTAs — Pill Buttons matching editorial design */}
         <div
           className="flex flex-col gap-4 transition-all"
           style={{
@@ -159,38 +160,37 @@ export const HeroSection: React.FC = () => {
             pointerEvents: isRevealed ? "auto" : "none",
           }}
         >
-          <div className="flex flex-wrap items-center gap-3">
-            {/* Primary CTA */}
-            <a
-              href="#labs"
-              className="inline-flex items-center justify-center bg-white text-black font-semibold rounded-full text-[14px] sm:text-[15px] px-6 py-2.5 whitespace-nowrap hover:bg-neutral-200 transition-colors duration-200 cursor-pointer shadow-xl active:scale-[0.98] gap-2"
-            >
-              <span>📞</span>
-              <span>Call My 24/7 AI Assistant</span>
-            </a>
-
-            {/* Secondary CTA */}
-            <a
-              href="#labs"
-              className="inline-flex items-center justify-center text-white bg-black/60 backdrop-blur-md border border-white/40 rounded-full text-[14px] sm:text-[15px] px-5 py-2.5 whitespace-nowrap hover:border-white hover:bg-white/20 transition-colors duration-200 cursor-pointer active:scale-[0.98] gap-2 shadow-lg"
-            >
-              <span>▶</span>
-              <span>Watch the 3-Min Demo</span>
-            </a>
-
-            {/* Direct CTA */}
-            <a
-              href="#openings"
-              className="inline-flex items-center justify-center text-neutral-200 hover:text-white text-[13px] sm:text-[14px] px-3 py-2 underline underline-offset-4 transition-colors font-medium drop-shadow-sm"
-            >
-              Schedule 10-Min Audit ↗
-            </a>
+          <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
+            {pillButtons.map((btn) => (
+              <a
+                key={btn.label}
+                href={btn.href}
+                className={`inline-flex items-center justify-center rounded-full text-[13px] sm:text-[14px] px-5 py-2.5 whitespace-nowrap transition-all duration-200 cursor-pointer active:scale-[0.98] ${
+                  btn.primary
+                    ? "bg-white text-black font-semibold hover:bg-neutral-200 shadow-lg"
+                    : "text-white bg-black/60 backdrop-blur-md border border-[var(--line-strong)] hover:border-white hover:bg-white/10 font-normal"
+                }`}
+              >
+                {btn.label}
+              </a>
+            ))}
           </div>
 
-          {/* Social Proof / Micro-Anchor */}
-          <div className="flex items-center gap-2 text-[12px] sm:text-[13px] text-neutral-300 font-mono tracking-tight pt-1 drop-shadow-sm">
-            <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span>Engineered on an enterprise-grade stack (Vapi, GoHighLevel, & ElevenLabs) with a guaranteed 60-second response latency.</span>
+          {/* Persistent Contact Line */}
+          <div className="flex items-center gap-2 text-xs sm:text-sm text-[var(--text-dim)] pt-2 font-mono">
+            <span>Reach me:</span>
+            <button
+              onClick={handleCopyEmail}
+              className="text-white hover:text-[var(--text-muted)] underline underline-offset-4 decoration-[var(--line-strong)] hover:decoration-white transition-colors cursor-pointer bg-transparent border-0 p-0"
+              title="Click to copy email address"
+            >
+              hello@mainframe.co
+            </button>
+            {copied && (
+              <span className="text-emerald-400 text-xs ml-1" role="status">
+                copied
+              </span>
+            )}
           </div>
         </div>
       </div>
