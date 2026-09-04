@@ -74,7 +74,7 @@ export const BackgroundScrub: React.FC<BackgroundScrubProps> = ({
       drawFrame(firstImg);
       if (onInitialReady) onInitialReady();
 
-      // 2. High-Priority Keyframes across full arc (0, 10, 20, ..., 141)
+      // 2. High-Priority Keyframes across full arc (0, 8, 16, ..., 141)
       const keyframeIndices: number[] = [];
       for (let i = 0; i < TOTAL_FRAMES; i += 8) {
         if (!isLoadedRef.current[i]) keyframeIndices.push(i);
@@ -123,16 +123,13 @@ export const BackgroundScrub: React.FC<BackgroundScrubProps> = ({
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = "high";
 
-    // Cover sizing
+    // Edge-to-edge cover sizing: guarantees 100% screen fill with zero black gaps/bars
     const scale = Math.max(cw / iw, ch / ih);
     const renderWidth = iw * scale;
     const renderHeight = ih * scale;
 
-    const isMobile = window.innerWidth < 768;
-    // On desktop (screen >= 768px), shift slightly right (12% of viewport) so hero text has breathing room
-    // On mobile, keep centered
-    const desktopShift = isMobile ? 0 : cw * 0.12;
-    const targetX = (cw - renderWidth) * 0.5 + desktopShift;
+    // Center positioning for full coverage
+    const targetX = (cw - renderWidth) * 0.5;
     const targetY = (ch - renderHeight) * 0.5;
 
     ctx.drawImage(img, targetX, targetY, renderWidth, renderHeight);
@@ -274,14 +271,6 @@ export const BackgroundScrub: React.FC<BackgroundScrubProps> = ({
           display: "block",
           transform: "translateZ(0)",
           WebkitBackfaceVisibility: "hidden",
-        }}
-      />
-      {/* Dark radial/horizontal & vertical gradient scrim behind text to guarantee crisp legibility across viewports */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.65) 40%, rgba(0,0,0,0.15) 70%, rgba(0,0,0,0) 100%), linear-gradient(to top, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.60) 45%, rgba(0,0,0,0) 80%)",
         }}
       />
     </div>
