@@ -30,7 +30,7 @@ export const ArchitectSection: React.FC = () => {
             ABOUT THE ARCHITECT • STEALTH POSITIONING
           </p>
 
-          <h2 className="text-[34px] sm:text-[46px] md:text-[54px] font-heading font-medium tracking-tight leading-[1.1] text-white">
+          <h2 className="text-[38px] sm:text-[54px] md:text-[64px] font-corp uppercase tracking-tight leading-[0.95] text-white">
             Documenting the next frontier of conversational AI.
           </h2>
 

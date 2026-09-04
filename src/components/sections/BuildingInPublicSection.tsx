@@ -68,7 +68,7 @@ export const BuildingInPublicSection: React.FC = () => {
             </span>
           </div>
 
-          <h2 className="text-[34px] sm:text-[46px] md:text-[54px] font-heading font-medium tracking-tight leading-[1.1] text-white">
+          <h2 className="text-[42px] sm:text-[60px] md:text-[72px] font-corp uppercase tracking-tight leading-[0.92] text-white">
             "Building in Public"
           </h2>
 

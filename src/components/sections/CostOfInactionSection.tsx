@@ -34,7 +34,7 @@ export const CostOfInactionSection: React.FC = () => {
             THE NEED • SPEED-TO-LEAD REALITY
           </p>
 
-          <h2 className="text-[34px] sm:text-[46px] md:text-[54px] font-heading font-medium tracking-tight leading-[1.1] text-white">
+          <h2 className="text-[38px] sm:text-[54px] md:text-[64px] font-corp uppercase tracking-tight leading-[0.95] text-white">
             The Silent Killer: What is "Lead Leakage" costing your business?
           </h2>
 

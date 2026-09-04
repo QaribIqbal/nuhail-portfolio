@@ -37,7 +37,7 @@ export const AuditSection: React.FC = () => {
             </p>
           </div>
 
-          <h2 className="text-[34px] sm:text-[46px] md:text-[54px] font-heading font-medium tracking-tight leading-[1.1] text-white">
+          <h2 className="text-[40px] sm:text-[58px] md:text-[68px] font-corp uppercase tracking-tight leading-[0.95] text-white">
             Let's plug your revenue leaks.
           </h2>
 
