@@ -3,14 +3,29 @@ import Lenis from "lenis";
 import { BackgroundScrub } from "./components/BackgroundScrub";
 import { Navbar } from "./components/Navbar";
 import { HeroSection } from "./components/HeroSection";
-import { MetaDemoSection } from "./components/sections/MetaDemoSection";
-import { CostOfInactionSection } from "./components/sections/CostOfInactionSection";
-import { FlywheelSection } from "./components/sections/FlywheelSection";
-import { BuildingInPublicSection } from "./components/sections/BuildingInPublicSection";
-import { ArchitectSection } from "./components/sections/ArchitectSection";
-import { AuditSection } from "./components/sections/AuditSection";
+import { LabsSection } from "./components/sections/LabsSection";
+import { ProcessSection } from "./components/sections/ProcessSection";
+import { StudioSection } from "./components/sections/StudioSection";
+import { OpeningsSection } from "./components/sections/OpeningsSection";
+import { ShopSection } from "./components/sections/ShopSection";
 import { Footer } from "./components/sections/Footer";
 import { CursorFollower } from "./components/ui/cursor-follower";
+
+// Whitespace pause — pattern interrupt between "How I Work" and "Studio".
+// One centered sentence, generous vertical space. The emptiness is the effect.
+const WhitespacePause: React.FC = () => (
+  <section
+    className="border-t border-[var(--line)] py-32 sm:py-40 px-5 flex items-center justify-center text-center"
+    aria-label="Interlude"
+  >
+    <p
+      className="text-[var(--text-muted)] text-base sm:text-lg max-w-sm sm:max-w-md leading-relaxed"
+      style={{ fontFamily: "var(--font-heading)" }}
+    >
+      Most automation fails at the handoff. I don't consider a build done until that part's solved.
+    </p>
+  </section>
+);
 
 export const App: React.FC = () => {
   // Initialize Lenis smooth scroll
@@ -60,34 +75,34 @@ export const App: React.FC = () => {
       {/* Background image sequence scrubbed by mouse in hero */}
       <BackgroundScrub />
 
-      {/* Top Fixed Navigation with Kinetic PP Neue Corp Mobile Menu */}
+      {/* Top fixed navigation */}
       <Navbar />
 
-      {/* Section 1: Hero (Above-The-Fold) */}
+      {/* Section 1: Hero — cursor-tracking portrait animation + sweep reveal */}
       <HeroSection />
 
-      {/* Blueprint Content Sections */}
+      {/* Main content — solid black backdrop over the fixed hero frame */}
       <main className="relative z-10 bg-black">
-        {/* Section 2: The Meta-Demo (Trust Generator) */}
-        <MetaDemoSection />
+        {/* #labs — What I Build + Selected Systems */}
+        <LabsSection />
 
-        {/* Section 3: The Cost of Inaction (Interactive Lead Leakage Calculator) */}
-        <CostOfInactionSection />
+        {/* #process — How I Work operating loop + Working Principles */}
+        <ProcessSection />
 
-        {/* Section 4: The Unique Mechanism (The Precision Lead-Recovery Flywheel™) */}
-        <FlywheelSection />
+        {/* Pattern interrupt: whitespace pause before Studio */}
+        <WhitespacePause />
 
-        {/* Section 5: "Building in Public" (Technical Audits & Teardowns) */}
-        <BuildingInPublicSection />
+        {/* #studio — Bio + timeline */}
+        <StudioSection />
 
-        {/* Section 6: About the Architect (Stealth Framing & Capabilities) */}
-        <ArchitectSection />
+        {/* #openings — Availability note */}
+        <OpeningsSection />
 
-        {/* Section 7: Frictionless Call to Action (10-Min System Audit) */}
-        <AuditSection />
+        {/* #shop — Template blueprints (coming soon) */}
+        <ShopSection />
       </main>
 
-      {/* Blueprint Footer */}
+      {/* Footer */}
       <Footer />
     </div>
   );

@@ -18,11 +18,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
   }, []);
 
   const navItems = [
-    { label: "Live Demo", href: "#demo" },
-    { label: "Lead Leakage", href: "#cost" },
-    { label: "Flywheel", href: "#flywheel" },
-    { label: "Builds", href: "#builds" },
-    { label: "Architect", href: "#about" },
+    { label: "Labs", href: "#labs" },
+    { label: "Process", href: "#process" },
+    { label: "Studio", href: "#studio" },
+    { label: "Openings", href: "#openings" },
+    { label: "Shop", href: "#shop" },
   ];
 
   const handleLinkClick = () => {
@@ -84,7 +84,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
           {/* Desktop CTA */}
           <div className="hidden sm:block">
             <a
-              href="#audit"
+              href="#openings"
               onClick={(e) => {
                 if (onContactClick) {
                   e.preventDefault();
@@ -93,7 +93,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
               }}
               className="inline-flex items-center justify-center bg-white text-black font-semibold text-xs sm:text-sm px-4 sm:px-5 py-2 rounded-full hover:bg-neutral-200 transition-all cursor-pointer active:scale-[0.98] shadow-sm"
             >
-              Audit My System ↗
+              Get in touch
             </a>
           </div>
 
@@ -151,21 +151,21 @@ export const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
             </a>
           ))}
           <a
-            href="#audit"
+            href="#openings"
             onClick={() => {
               handleLinkClick();
               if (onContactClick) onContactClick();
             }}
             className="text-[44px] sm:text-[62px] leading-[0.92] font-corp uppercase text-white underline underline-offset-8 decoration-1 hover:text-neutral-400 transition-colors tracking-tight mt-2"
           >
-            SCHEDULE AUDIT
+            GET IN TOUCH
           </a>
         </div>
 
         {/* Footer info inside mobile menu */}
         <div className="pt-6 border-t border-[var(--line)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs font-mono text-[var(--text-dim)]">
-          <span>MAINFRAME® • LEAD-TO-BOOKING ARCHITECT</span>
-          <span>LATENCY: &lt;60s GUARANTEED</span>
+          <span>MAINFRAME® • AI AUTOMATION ENGINEER</span>
+          <span>hello@mainframe.co</span>
         </div>
       </div>
     </>

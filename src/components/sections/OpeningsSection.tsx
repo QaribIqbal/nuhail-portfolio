@@ -1,87 +1,104 @@
 import React from "react";
-import { useInView } from "../../hooks/useInView";
+import { useScrollReveal } from "../../hooks/useScrollReveal";
+
+const openItems = [
+  "Full-time or contract AI automation / agent engineering roles",
+  "Freelance projects on Upwork with a defined workflow to automate, not vague \"help with AI\" asks",
+  "Teams that want someone who owns a build end to end — not just the prompt",
+];
 
 export const OpeningsSection: React.FC = () => {
-  const { ref, isInView } = useInView();
+  const { ref: headerRef, visible: headerVisible } = useScrollReveal(0.05);
+  const { ref: bodyRef, visible: bodyVisible } = useScrollReveal(0.05);
 
-  const lookingFor = [
-    "Full-time or contract AI automation / agent engineering roles",
-    "Freelance projects on Upwork with a defined workflow to automate, not vague \"help with AI\" asks",
-    "Teams that want someone who owns a build end to end — not just the prompt",
-  ];
+  const revealStyle = (visible: boolean, delay = 0): React.CSSProperties => ({
+    opacity: visible ? 1 : 0,
+    transform: visible ? "translateY(0)" : "translateY(20px)",
+    transition: `opacity 0.65s ease ${delay}ms, transform 0.65s ease ${delay}ms`,
+  });
 
   return (
     <section
       id="openings"
-      className="relative z-10 w-full bg-black text-white border-t border-[var(--line)]"
+      aria-labelledby="openings-heading"
+      className="border-t border-[var(--line)]"
     >
-      <div className="max-w-[var(--content)] mx-auto px-5 sm:px-8 md:px-12 py-24 sm:py-32">
-        <div
-          ref={ref}
-          className="transition-all duration-700 max-w-3xl"
-          style={{
-            opacity: isInView ? 1 : 0,
-            transform: isInView ? "translateY(0)" : "translateY(20px)",
-          }}
-        >
-          <p className="text-[12px] sm:text-[13px] tracking-[0.2em] uppercase text-[var(--text-muted)] font-medium mb-3">
+      <div className="max-w-[var(--content)] mx-auto px-5 sm:px-8 py-24 sm:py-32">
+
+        {/* Header */}
+        <div ref={headerRef}>
+          <p
+            className="text-xs font-mono uppercase tracking-widest text-[var(--text-dim)] mb-5"
+            style={revealStyle(headerVisible)}
+          >
             WHAT I'M OPEN TO
           </p>
-          <h2 className="text-[32px] sm:text-[44px] md:text-[50px] tracking-tight font-normal leading-[1.15] text-[var(--text)]">
-            Currently open to a short list of things.
+          <h2
+            id="openings-heading"
+            className="font-corp uppercase text-white max-w-2xl"
+            style={{
+              fontSize: "clamp(34px, 5vw, 62px)",
+              lineHeight: 0.92,
+              letterSpacing: "-0.01em",
+              ...revealStyle(headerVisible, 60),
+            }}
+          >
+            Currently open to
+            <br className="hidden sm:block" /> a short list of things.
           </h2>
+        </div>
 
-          <p className="text-[16px] sm:text-[19px] text-[var(--text-muted)] mt-5 leading-relaxed font-normal">
-            This isn't a company with a hiring pipeline — it's my personal practice.
-            "Openings" here just means what I'm actively looking for right now: a role, a
-            contract, or a client with a real system worth fixing.
+        {/* Body */}
+        <div ref={bodyRef} className="mt-12 sm:mt-16 max-w-2xl">
+          <p
+            className="text-[var(--text-muted)] text-base sm:text-lg leading-relaxed mb-10"
+            style={revealStyle(bodyVisible)}
+          >
+            This isn't a company with a hiring pipeline — it's my personal practice. "Openings"
+            here just means what I'm actively looking for right now: a role, a contract, or a
+            client with a real system worth fixing.
           </p>
 
-          <div className="mt-12 space-y-4">
-            <h3 className="text-[13px] tracking-[0.15em] uppercase font-mono text-[var(--text-dim)]">
-              WHAT I'M LOOKING FOR
-            </h3>
-            <ul className="space-y-4 pt-2">
-              {lookingFor.map((item, idx) => (
-                <li
-                  key={item}
-                  className="flex items-start gap-4 border-t border-[var(--line)] pt-4"
-                  style={{
-                    transitionDelay: `${idx * 80}ms`,
-                  }}
+          <p
+            className="text-xs font-mono uppercase tracking-widest text-[var(--text-dim)] mb-5"
+            style={revealStyle(bodyVisible, 60)}
+          >
+            What I'm looking for
+          </p>
+
+          <ul className="divide-y divide-[var(--line)]" role="list">
+            {openItems.map((item, i) => (
+              <li
+                key={i}
+                className="py-5 flex items-start gap-6"
+                style={revealStyle(bodyVisible, 100 + i * 80)}
+              >
+                <span
+                  className="text-xs font-mono text-[var(--text-dim)] shrink-0 mt-0.5"
+                  aria-hidden="true"
                 >
-                  <span className="text-[13px] font-mono text-[var(--text-dim)] pt-0.5">
-                    0{idx + 1}
-                  </span>
-                  <span className="text-[16px] sm:text-[18px] text-[var(--text)] font-normal leading-relaxed">
-                    {item}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
+                  —
+                </span>
+                <p className="text-[var(--text-muted)] text-sm sm:text-[15px] leading-relaxed">
+                  {item}
+                </p>
+              </li>
+            ))}
+          </ul>
 
-          <div className="mt-12 pt-8 border-t border-[var(--line)]">
-            <p className="text-[15px] sm:text-[17px] text-[var(--text-muted)] leading-relaxed font-normal mb-8">
-              Have a project instead of a job post? Use "Pitch an idea" — tell me what's
-              broken and I'll tell you honestly if it's a fit.
-            </p>
-
-            <div className="flex flex-wrap items-center gap-3">
-              <a
-                href="mailto:hello@mainframe.co?subject=Project%20Pitch"
-                className="inline-flex items-center justify-center bg-white text-black border border-black/10 rounded-full text-[14px] sm:text-[15px] px-6 py-2.5 hover:bg-black hover:text-white transition-colors duration-200 font-medium"
-              >
-                Pitch an idea
-              </a>
-              <a
-                href="mailto:hello@mainframe.co"
-                className="inline-flex items-center justify-center bg-transparent text-white border border-white rounded-full text-[14px] sm:text-[15px] px-6 py-2.5 hover:bg-white hover:text-black transition-colors duration-200 font-medium"
-              >
-                Reach me directly
-              </a>
-            </div>
-          </div>
+          <p
+            className="text-[var(--text-dim)] text-sm sm:text-[15px] leading-relaxed mt-10 border-t border-[var(--line)] pt-8"
+            style={revealStyle(bodyVisible, 420)}
+          >
+            Have a project instead of a job post? Use "Pitch an idea" — tell me what's broken
+            and I'll tell you honestly if it's a fit.{" "}
+            <a
+              href="mailto:hello@mainframe.co"
+              className="text-white underline underline-offset-4 decoration-[var(--line-strong)] hover:decoration-white transition-colors"
+            >
+              Pitch an idea →
+            </a>
+          </p>
         </div>
       </div>
     </section>

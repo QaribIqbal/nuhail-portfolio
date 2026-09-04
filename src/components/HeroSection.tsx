@@ -162,7 +162,7 @@ export const HeroSection: React.FC = () => {
           <div className="flex flex-wrap items-center gap-3">
             {/* Primary CTA */}
             <a
-              href="#demo"
+              href="#labs"
               className="inline-flex items-center justify-center bg-white text-black font-semibold rounded-full text-[14px] sm:text-[15px] px-6 py-2.5 whitespace-nowrap hover:bg-neutral-200 transition-colors duration-200 cursor-pointer shadow-xl active:scale-[0.98] gap-2"
             >
               <span>📞</span>
@@ -171,16 +171,16 @@ export const HeroSection: React.FC = () => {
 
             {/* Secondary CTA */}
             <a
-              href="#builds"
+              href="#labs"
               className="inline-flex items-center justify-center text-white bg-black/60 backdrop-blur-md border border-white/40 rounded-full text-[14px] sm:text-[15px] px-5 py-2.5 whitespace-nowrap hover:border-white hover:bg-white/20 transition-colors duration-200 cursor-pointer active:scale-[0.98] gap-2 shadow-lg"
             >
               <span>▶</span>
               <span>Watch the 3-Min Demo</span>
             </a>
 
-            {/* Direct Audit CTA */}
+            {/* Direct CTA */}
             <a
-              href="#audit"
+              href="#openings"
               className="inline-flex items-center justify-center text-neutral-200 hover:text-white text-[13px] sm:text-[14px] px-3 py-2 underline underline-offset-4 transition-colors font-medium drop-shadow-sm"
             >
               Schedule 10-Min Audit ↗
