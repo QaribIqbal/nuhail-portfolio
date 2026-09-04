@@ -61,7 +61,7 @@ export const PremiumLoader: React.FC<PremiumLoaderProps> = ({
     >
       {/* Top Header */}
       <div className="w-full max-w-5xl flex items-center justify-between text-xs font-mono text-[var(--text-dim)] uppercase tracking-widest">
-        <span>Mainframe®</span>
+        <span>Nuhail Iqbal</span>
         <div className="flex items-center gap-2">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
           <span>System Initialization</span>

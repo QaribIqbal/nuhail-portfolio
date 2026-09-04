@@ -45,7 +45,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
             className="text-[21px] sm:text-[25px] tracking-tight text-white select-none inline-flex items-center font-heading"
             style={{ fontFamily: "var(--font-heading)" }}
           >
-            Mainframe®
+            Nuhail Iqbal
           </a>
           <span
             className="text-[25px] sm:text-[30px] text-white select-none inline-block leading-none"
@@ -164,7 +164,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
 
         {/* Footer info inside mobile menu */}
         <div className="pt-6 border-t border-[var(--line)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs font-mono text-[var(--text-dim)]">
-          <span>MAINFRAME® • AI AUTOMATION ENGINEER</span>
+          <span>NUHAIL IQBAL • AI AUTOMATION ENGINEER</span>
           <span>hello@mainframe.co</span>
         </div>
       </div>

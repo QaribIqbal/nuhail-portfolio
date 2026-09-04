@@ -24,7 +24,7 @@ export const Footer: React.FC = () => {
               className="inline-block font-heading text-white text-[20px] sm:text-[22px] tracking-tight mb-3 hover:opacity-70 transition-opacity"
               style={{ fontFamily: "var(--font-heading)" }}
             >
-              Mainframe®
+              Nuhail Iqbal
             </a>
             <p className="text-[var(--text-muted)] text-sm sm:text-[15px] leading-relaxed">
               I turn repetitive work into systems that think, route, and act.
@@ -74,7 +74,7 @@ export const Footer: React.FC = () => {
             </a>
           </div>
           <p className="text-xs font-mono text-[var(--text-dim)]">
-            Mainframe — Labs, Studio, Openings, Shop.
+            Nuhail Iqbal — Labs, Studio, Openings, Shop.
           </p>
         </div>
       </div>
