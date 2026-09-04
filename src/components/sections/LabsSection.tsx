@@ -40,7 +40,7 @@ export const LabsSection: React.FC = () => {
       description:
         "A voice-and-chat intake that qualifies buyers by budget and timeline, books the next step, and hands unusual requests straight to a human. Replaced 80+ hours a month of manual work and a $400/month subscription tool.",
       tags: ["n8n", "OpenAI", "HubSpot", "CRM routing"],
-      image: "/media/real_estate_ai.png",
+      image: "/media/real_estate_ai.webp",
       alt: "AI Lead Response system diagram",
       link: "https://app.notion.com/p/TechBees-AI-Lead-Response-for-Real-Estate-3b0a34737b6681109648f37a61f61786",
       isExternal: true,
@@ -51,7 +51,7 @@ export const LabsSection: React.FC = () => {
       description:
         "Built on Make.com and a vector knowledge base, this agent resolves the majority of incoming tickets on its own and cut response time from 48 hours to under a minute.",
       tags: ["Make.com", "Pinecone", "Zendesk"],
-      image: "/media/ecommerce_support_ai.png",
+      image: "/media/ecommerce_support_ai.webp",
       alt: "E-commerce support automation architecture",
       link: "#openings",
       isExternal: false,
@@ -62,7 +62,7 @@ export const LabsSection: React.FC = () => {
       description:
         "A Python and OpenAI pipeline that reads and structures 500+ contracts a month, cutting manual review time by 90%.",
       tags: ["Python", "OpenAI API", "Salesforce"],
-      image: "/media/legal_data_ai.png",
+      image: "/media/legal_data_ai.webp",
       alt: "Legal document processing pipeline",
       link: "#openings",
       isExternal: false,
@@ -73,7 +73,7 @@ export const LabsSection: React.FC = () => {
       description:
         "A scheduled workflow that reads structured client data, drafts account-specific updates, sends each report, and confirms delivery internally. No one has to remember report day again.",
       tags: ["Scheduled triggers", "Structured data", "Email delivery"],
-      image: "/media/agency-reporting-flow.png",
+      image: "/media/agency-reporting-flow.webp",
       alt: "Agency automated reporting pipeline diagram",
       link: "https://app.notion.com/p/TechBees-AI-Automation-for-Marketing-Creative-Agencies-3b0a34737b66817ba1cafae3aa98edd8",
       isExternal: true,
@@ -84,7 +84,7 @@ export const LabsSection: React.FC = () => {
       description:
         "Handles what comes in at 11pm: FAQs, listing or inventory context, requirement capture, and escalation when it actually matters.",
       tags: ["WhatsApp API", "Conversational AI", "Escalation"],
-      image: "/media/nuhail-system-network.png",
+      image: "/media/nuhail-system-network.webp",
       alt: "WhatsApp automated assistant routing logic",
       link: "#openings",
       isExternal: false,
@@ -95,7 +95,7 @@ export const LabsSection: React.FC = () => {
       description:
         "Turns a closed deal into a fully set-up project: assets requested, owners assigned, CRM updated, team notified — automatically.",
       tags: ["Workflow orchestration", "CRM", "Notifications"],
-      image: "/media/real-estate-flow.png",
+      image: "/media/real-estate-flow.webp",
       alt: "Client onboarding orchestration architecture",
       link: "#openings",
       isExternal: false,

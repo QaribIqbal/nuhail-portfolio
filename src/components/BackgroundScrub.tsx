@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 
 const TOTAL_FRAMES = 142;
 
-// Helper to format frame path: /media/ezgif-8593f034cb81842c-png-split/ezgif-frame-001.png
+// Helper to format frame path to lightweight, high-fidelity WebP
 const getFrameUrl = (index: number) => {
   const frameNum = String(index + 1).padStart(3, "0");
-  return `/media/ezgif-8593f034cb81842c-png-split/ezgif-frame-${frameNum}.png`;
+  return `/media/frames-webp/ezgif-frame-${frameNum}.webp`;
 };
 
 export const BackgroundScrub: React.FC = () => {
@@ -18,27 +18,64 @@ export const BackgroundScrub: React.FC = () => {
 
   const [currentSrc, setCurrentSrc] = useState<string>(getFrameUrl(0));
 
-  // Preload all 142 lossless PNG frames into decoded memory cache
+  // Prioritized 3-tier progressive preloading
   useEffect(() => {
-    // 1. Preload frame 0 immediately
-    const firstImg = new Image();
-    firstImg.src = getFrameUrl(0);
-    firstImg.decoding = "async";
-    cacheRef.current[0] = firstImg;
-    firstImg.onload = () => {
-      isLoadedRef.current[0] = true;
+    let isCancelled = false;
+
+    const loadSingleFrame = (idx: number): Promise<void> => {
+      return new Promise((resolve) => {
+        if (isLoadedRef.current[idx] && cacheRef.current[idx]) {
+          resolve();
+          return;
+        }
+        const img = new Image();
+        img.src = getFrameUrl(idx);
+        img.decoding = "async";
+        cacheRef.current[idx] = img;
+        img.onload = () => {
+          isLoadedRef.current[idx] = true;
+          resolve();
+        };
+        img.onerror = () => {
+          resolve();
+        };
+      });
     };
 
-    // 2. Preload remaining frames progressively
-    for (let i = 1; i < TOTAL_FRAMES; i++) {
-      const img = new Image();
-      img.src = getFrameUrl(i);
-      img.decoding = "async";
-      cacheRef.current[i] = img;
-      img.onload = () => {
-        isLoadedRef.current[i] = true;
-      };
-    }
+    const runProgressivePreload = async () => {
+      // Tier 1: Preload initial frame immediately
+      await loadSingleFrame(0);
+      if (isCancelled) return;
+
+      // Tier 2: Preload 8 milestone keyframes across the sequence
+      // Ensures instant guideposts if the user scrubs immediately
+      const milestones = [20, 40, 60, 80, 100, 120, 141];
+      await Promise.all(milestones.map((idx) => loadSingleFrame(idx)));
+      if (isCancelled) return;
+
+      // Tier 3: Stream the remaining in-between frames in gentle batches
+      const remainingIndices: number[] = [];
+      for (let i = 1; i < TOTAL_FRAMES; i++) {
+        if (!isLoadedRef.current[i]) {
+          remainingIndices.push(i);
+        }
+      }
+
+      const BATCH_SIZE = 8;
+      for (let i = 0; i < remainingIndices.length; i += BATCH_SIZE) {
+        if (isCancelled) return;
+        const batch = remainingIndices.slice(i, i + BATCH_SIZE);
+        await Promise.all(batch.map((idx) => loadSingleFrame(idx)));
+        // Yield 20ms to browser main thread
+        await new Promise((r) => setTimeout(r, 20));
+      }
+    };
+
+    runProgressivePreload();
+
+    return () => {
+      isCancelled = true;
+    };
   }, []);
 
   // Map cursor X position directly across viewport so moving cursor to the right
@@ -46,7 +83,6 @@ export const BackgroundScrub: React.FC = () => {
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       const windowWidth = window.innerWidth || 1;
-      // 30px edge padding so reaching the right side fully activates frame 142
       const padding = 30;
       const effectiveWidth = Math.max(1, windowWidth - padding * 2);
       const normalizedX = Math.max(
@@ -88,7 +124,6 @@ export const BackgroundScrub: React.FC = () => {
       const diff = targetFrameRef.current - currentFrameRef.current;
 
       if (Math.abs(diff) > 0.05) {
-        // Smooth lerp towards target frame
         currentFrameRef.current += diff * 0.35;
       } else {
         currentFrameRef.current = targetFrameRef.current;
@@ -99,7 +134,7 @@ export const BackgroundScrub: React.FC = () => {
         Math.min(TOTAL_FRAMES - 1, Math.round(currentFrameRef.current))
       );
 
-      // If target frame is still loading, pick closest loaded frame
+      // Closest loaded frame lookup prevents any blank/flickering frames
       if (!isLoadedRef.current[frameIdx]) {
         for (let offset = 1; offset < TOTAL_FRAMES; offset++) {
           const left = frameIdx - offset;
