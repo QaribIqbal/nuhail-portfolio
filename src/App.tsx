@@ -3,11 +3,12 @@ import Lenis from "lenis";
 import { BackgroundScrub } from "./components/BackgroundScrub";
 import { Navbar } from "./components/Navbar";
 import { HeroSection } from "./components/HeroSection";
-import { LabsSection } from "./components/sections/LabsSection";
-import { ProcessSection } from "./components/sections/ProcessSection";
-import { StudioSection } from "./components/sections/StudioSection";
-import { OpeningsSection } from "./components/sections/OpeningsSection";
-import { ShopSection } from "./components/sections/ShopSection";
+import { MetaDemoSection } from "./components/sections/MetaDemoSection";
+import { CostOfInactionSection } from "./components/sections/CostOfInactionSection";
+import { FlywheelSection } from "./components/sections/FlywheelSection";
+import { BuildingInPublicSection } from "./components/sections/BuildingInPublicSection";
+import { ArchitectSection } from "./components/sections/ArchitectSection";
+import { AuditSection } from "./components/sections/AuditSection";
 import { Footer } from "./components/sections/Footer";
 import { CursorFollower } from "./components/ui/cursor-follower";
 
@@ -59,31 +60,34 @@ export const App: React.FC = () => {
       {/* Background image sequence scrubbed by mouse in hero */}
       <BackgroundScrub />
 
-      {/* Top Fixed Navigation */}
+      {/* Top Fixed Navigation with Kinetic PP Neue Corp Mobile Menu */}
       <Navbar />
 
-      {/* Hero Section */}
+      {/* Section 1: Hero (Above-The-Fold) */}
       <HeroSection />
 
-      {/* Sections below the hero */}
+      {/* Blueprint Content Sections */}
       <main className="relative z-10 bg-black">
-        {/* 1. #labs — What I Build + Selected Systems */}
-        <LabsSection />
+        {/* Section 2: The Meta-Demo (Trust Generator) */}
+        <MetaDemoSection />
 
-        {/* 2. #process — How I Work (Operating Loop + Working Principles) */}
-        <ProcessSection />
+        {/* Section 3: The Cost of Inaction (Interactive Lead Leakage Calculator) */}
+        <CostOfInactionSection />
 
-        {/* 3. #studio — Who I Am (About + Timeline) */}
-        <StudioSection />
+        {/* Section 4: The Unique Mechanism (The Precision Lead-Recovery Flywheel™) */}
+        <FlywheelSection />
 
-        {/* 4. #openings — What I'm Open To */}
-        <OpeningsSection />
+        {/* Section 5: "Building in Public" (Technical Audits & Teardowns) */}
+        <BuildingInPublicSection />
 
-        {/* 5. #shop — Templates & Blueprints (Coming Soon Waitlist) */}
-        <ShopSection />
+        {/* Section 6: About the Architect (Stealth Framing & Capabilities) */}
+        <ArchitectSection />
+
+        {/* Section 7: Frictionless Call to Action (10-Min System Audit) */}
+        <AuditSection />
       </main>
 
-      {/* 6. Footer */}
+      {/* Blueprint Footer */}
       <Footer />
     </div>
   );

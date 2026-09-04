@@ -3,17 +3,16 @@ import { useTypewriter } from "../hooks/useTypewriter";
 
 export const HeroSection: React.FC = () => {
   const [isRevealed, setIsRevealed] = useState(false);
-  const [copied, setCopied] = useState(false);
 
   const touchedLeftRef = useRef(false);
   const touchedRightRef = useRef(false);
 
-  // Typewriter starts when revealed
+  // Typewriter starts when revealed - Outcome headline from Blueprint
   const typewriterText =
-    "Glad you stopped in. Good taste tends to find me. Now, what are we building?";
+    "I build 24/7 autonomous booking engines that recover missed calls and capture hot leads in under 60 seconds.";
   const { displayed, done } = useTypewriter(isRevealed ? typewriterText : "", {
-    speed: 38,
-    startDelay: 300,
+    speed: 30,
+    startDelay: 250,
   });
 
   // Cursor-sweep reveal & fallback accessibility
@@ -98,118 +97,101 @@ export const HeroSection: React.FC = () => {
 
   return (
     <section
-      className="relative z-1 h-screen w-full flex flex-col justify-end pb-12 md:justify-center md:pb-0 px-5 sm:px-8 md:px-10 overflow-hidden"
+      className="relative z-1 h-screen w-full flex flex-col justify-end pb-12 md:justify-center md:pb-0 px-5 sm:px-8 md:px-12 overflow-hidden"
       style={{ zIndex: 1 }}
     >
-      <div className="max-w-xl relative z-10 w-full">
-        {/* 1. Blurred intro label */}
+      <div className="max-w-xl lg:max-w-2xl relative z-10 w-full">
+        {/* 1. Kicker / Micro-anchor badge */}
         <div
-          className="pointer-events-none select-none mb-5 sm:mb-6"
+          className="pointer-events-none select-none mb-3 sm:mb-4 inline-flex items-center gap-2"
           style={{
-            fontSize: "clamp(18px, 4vw, 26px)",
-            lineHeight: 1.3,
-            fontWeight: 400,
-            color: "var(--text)",
-            filter: "blur(4px)",
-            WebkitFilter: "blur(4px)",
+            fontSize: "clamp(11px, 2vw, 13px)",
+            lineHeight: 1.4,
+            fontWeight: 600,
+            letterSpacing: "0.12em",
+            textTransform: "uppercase",
+            color: "rgba(255, 255, 255, 0.9)",
           }}
-          aria-hidden="true"
         >
-          Hey there, meet A.R.I.A,
-          <br />
-          Mainframe's Adaptive Response Interface Agent.
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse inline-block" />
+          <span>AI SYSTEMS & LEAD-TO-BOOKING ARCHITECT</span>
         </div>
 
-        {/* 2. Typewriter text (revealed via cursor sweep or timer) */}
-        <p
-          className="mb-5 sm:mb-6 transition-opacity duration-500"
+        {/* 2. Typewriter headline (revealed via cursor sweep or timer) */}
+        <h1
+          className="mb-4 sm:mb-5 transition-opacity duration-500 font-heading text-white font-medium drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]"
           style={{
-            color: "var(--text)",
-            fontSize: "clamp(18px, 4vw, 26px)",
-            lineHeight: 1.35,
-            fontWeight: 400,
-            minHeight: "54px",
+            fontSize: "clamp(22px, 3.2vw, 36px)",
+            lineHeight: 1.25,
+            letterSpacing: "-0.02em",
+            minHeight: "84px",
             opacity: isRevealed ? 1 : 0,
           }}
         >
           {displayed}
           {isRevealed && !done && (
             <span
-              className="inline-block w-[2px] h-[1.1em] bg-white align-middle ml-[2px] animate-blink"
+              className="inline-block w-[2px] h-[1.1em] bg-white align-middle ml-[3px] animate-blink"
               aria-hidden="true"
             />
           )}
-        </p>
+        </h1>
 
-        {/* 3. Action pill buttons (fade in on reveal) */}
-        <div
-          className="flex flex-wrap gap-y-1 transition-all"
+        {/* 3. Sub-headline (The Mechanism) - High contrast white/neutral-200 */}
+        <p
+          className="text-[15px] sm:text-[17px] text-neutral-200 max-w-lg lg:max-w-xl mb-6 leading-relaxed font-normal transition-all drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
           style={{
             opacity: isRevealed ? 1 : 0,
             transform: isRevealed ? "translateY(0)" : "translateY(8px)",
-            transition: "opacity 0.5s ease, transform 0.5s ease",
+            transition: "opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s",
+          }}
+        >
+          Stop bleeding high-intent customers to your competitors. I install custom AI voice receptionists and instant SMS missed-call text-backs that turn dropped calls into booked calendar appointments on autopilot.
+        </p>
+
+        {/* 4. Action CTAs + Micro-anchor */}
+        <div
+          className="flex flex-col gap-4 transition-all"
+          style={{
+            opacity: isRevealed ? 1 : 0,
+            transform: isRevealed ? "translateY(0)" : "translateY(10px)",
+            transition: "opacity 0.5s ease 0.3s, transform 0.5s ease 0.3s",
             pointerEvents: isRevealed ? "auto" : "none",
           }}
         >
-          {pillButtons.map((btn) => (
+          <div className="flex flex-wrap items-center gap-3">
+            {/* Primary CTA */}
             <a
-              key={btn.label}
-              href={btn.href}
-              className="inline-flex items-center justify-center bg-white text-black border border-black/10 rounded-full text-[13px] sm:text-[15px] px-4 sm:px-5 py-[0.3em] mx-[0.2em] mb-[0.4em] whitespace-nowrap hover:bg-black hover:text-white transition-colors duration-200 cursor-pointer shadow-sm active:scale-[0.98]"
+              href="#demo"
+              className="inline-flex items-center justify-center bg-white text-black font-semibold rounded-full text-[14px] sm:text-[15px] px-6 py-2.5 whitespace-nowrap hover:bg-neutral-200 transition-colors duration-200 cursor-pointer shadow-xl active:scale-[0.98] gap-2"
             >
-              {btn.label}
+              <span>📞</span>
+              <span>Call My 24/7 AI Assistant</span>
             </a>
-          ))}
 
-          {/* Outline pill button with email and copy icon */}
-          <button
-            type="button"
-            onClick={handleCopyEmail}
-            title="Click to copy email address"
-            className="inline-flex items-center justify-center text-white bg-transparent border border-white rounded-full text-[13px] sm:text-[15px] px-4 sm:px-5 py-[0.3em] mx-[0.2em] mb-[0.4em] whitespace-nowrap gap-2 sm:gap-3 hover:bg-white hover:text-black transition-colors duration-200 cursor-pointer active:scale-[0.98] group relative"
-          >
-            <span>
-              Reach us:{" "}
-              <span className="underline underline-offset-1 font-normal">
-                hello@mainframe.co
-              </span>
-            </span>
-
-            {/* 12x12 copy icon */}
-            <svg
-              className="w-3 h-3 flex-shrink-0 transition-transform group-hover:scale-110"
-              viewBox="0 0 12 12"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
+            {/* Secondary CTA */}
+            <a
+              href="#builds"
+              className="inline-flex items-center justify-center text-white bg-black/60 backdrop-blur-md border border-white/40 rounded-full text-[14px] sm:text-[15px] px-5 py-2.5 whitespace-nowrap hover:border-white hover:bg-white/20 transition-colors duration-200 cursor-pointer active:scale-[0.98] gap-2 shadow-lg"
             >
-              <rect
-                x="3.5"
-                y="1.5"
-                width="7"
-                height="7"
-                rx="1"
-                stroke="currentColor"
-                strokeWidth="1.2"
-              />
-              <rect
-                x="1.5"
-                y="3.5"
-                width="7"
-                height="7"
-                rx="1"
-                stroke="currentColor"
-                strokeWidth="1.2"
-                fill="none"
-              />
-            </svg>
+              <span>▶</span>
+              <span>Watch the 3-Min Demo</span>
+            </a>
 
-            {copied && (
-              <span className="absolute -top-7 left-1/2 -translate-x-1/2 bg-white text-black text-[11px] font-medium px-2 py-0.5 rounded shadow pointer-events-none">
-                Copied!
-              </span>
-            )}
-          </button>
+            {/* Direct Audit CTA */}
+            <a
+              href="#audit"
+              className="inline-flex items-center justify-center text-neutral-200 hover:text-white text-[13px] sm:text-[14px] px-3 py-2 underline underline-offset-4 transition-colors font-medium drop-shadow-sm"
+            >
+              Schedule 10-Min Audit ↗
+            </a>
+          </div>
+
+          {/* Social Proof / Micro-Anchor */}
+          <div className="flex items-center gap-2 text-[12px] sm:text-[13px] text-neutral-300 font-mono tracking-tight pt-1 drop-shadow-sm">
+            <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span>Engineered on an enterprise-grade stack (Vapi, GoHighLevel, & ElevenLabs) with a guaranteed 60-second response latency.</span>
+          </div>
         </div>
       </div>
     </section>

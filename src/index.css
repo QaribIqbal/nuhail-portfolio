@@ -1,7 +1,16 @@
 @import "tailwindcss";
 @import "lenis/dist/lenis.css";
 
+@font-face {
+  font-family: 'PP Neue Corp Tight';
+  src: url('/fonts/PPNeueCorp-TightUltrabold.otf') format('opentype');
+  font-weight: 700 800;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
+  --font-display: 'PP Neue Corp Tight', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-heading: 'HelveticaNowDisplay-Medium', 'Helvetica Neue', Arial, sans-serif;
   --font-body: 'HelveticaNowDisplayW01-Rg', 'Helvetica Neue', Arial, sans-serif;
   --bg: #000000;
@@ -12,6 +21,7 @@
   --text-dim: #666666;
   --line: rgba(255, 255, 255, 0.1);
   --line-strong: rgba(255, 255, 255, 0.2);
+  --accent: #22c55e;
   --content: 1240px;
 }
 
@@ -55,6 +65,11 @@ body {
 
 .font-body {
   font-family: var(--font-body);
+}
+
+.font-corp {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
 }
 
 @keyframes blink {

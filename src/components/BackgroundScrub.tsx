@@ -191,10 +191,18 @@ export const BackgroundScrub: React.FC = () => {
           width: "100%",
           height: "100%",
           objectFit: "cover",
-          objectPosition: "70% center",
+          objectPosition: "82% center",
           imageRendering: "auto",
           transform: "translateZ(0)",
           WebkitBackfaceVisibility: "hidden",
+        }}
+      />
+      {/* Dark radial/horizontal gradient scrim behind text on left to guarantee 100% crisp legibility */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.70) 35%, rgba(0,0,0,0.30) 60%, rgba(0,0,0,0) 100%)",
         }}
       />
     </div>
