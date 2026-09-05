@@ -9,9 +9,26 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Gatuzo';
+  src: url('/fonts/GCGatuzo-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gatuzo';
+  src: url('/fonts/GCGatuzo-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --font-display: 'PP Neue Corp Tight', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-heading: 'HelveticaNowDisplay-Medium', 'Helvetica Neue', Arial, sans-serif;
+  --font-hero: 'Gatuzo', var(--font-heading);
   --font-body: 'HelveticaNowDisplayW01-Rg', 'Helvetica Neue', Arial, sans-serif;
   --bg: #000000;
   --surface: #0a0a0a;
@@ -61,6 +78,10 @@ body {
 
 .font-heading {
   font-family: var(--font-heading);
+}
+
+.font-hero {
+  font-family: var(--font-hero);
 }
 
 .font-body {

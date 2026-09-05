@@ -102,25 +102,10 @@ export const HeroSection: React.FC = () => {
       style={{ zIndex: 1 }}
       aria-label="Hero Introduction"
     >
-      <div className="max-w-xl lg:max-w-2xl relative z-10 w-full">
-        {/* 1. Kicker badge */}
-        <div
-          className="pointer-events-none select-none mb-3 sm:mb-4 inline-flex items-center gap-2 font-mono"
-          style={{
-            fontSize: "clamp(11px, 2vw, 13px)",
-            lineHeight: 1.4,
-            letterSpacing: "0.1em",
-            textTransform: "uppercase",
-            color: "var(--text-dim)",
-          }}
-        >
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse inline-block" />
-          <span>Hey there, meet A.R.I.A — Adaptive Response Interface Agent</span>
-        </div>
-
-        {/* 2. Typewriter headline */}
+      <div className="max-w-[24rem] relative z-10 w-full">
+        {/* Typewriter headline */}
         <h1
-          className="mb-4 sm:mb-5 transition-opacity duration-500 font-heading text-white font-medium drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]"
+          className="mb-4 sm:mb-5 transition-opacity duration-500 font-hero text-white font-medium drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]"
           style={{
             fontSize: "clamp(24px, 3.4vw, 40px)",
             lineHeight: 1.2,
@@ -140,7 +125,7 @@ export const HeroSection: React.FC = () => {
 
         {/* 3. Subheading — first person, dry editorial tone */}
         <p
-          className="text-[15px] sm:text-[17px] text-[var(--text-muted)] max-w-lg mb-6 leading-relaxed font-normal transition-all drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
+          className="text-[15px] sm:text-[17px] text-white/95 max-w-lg mb-6 leading-relaxed font-medium font-hero transition-all drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]"
           style={{
             opacity: isRevealed ? 1 : 0,
             transform: isRevealed ? "translateY(0)" : "translateY(8px)",
