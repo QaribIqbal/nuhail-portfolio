@@ -3,7 +3,6 @@ import { useScrollReveal } from "../../hooks/useScrollReveal";
 
 const openItems = [
   "Full-time or contract AI automation / agent engineering roles",
-  "Freelance projects on Upwork with a defined workflow to automate, not vague \"help with AI\" asks",
   "Teams that want someone who owns a build end to end — not just the prompt",
 ];
 
@@ -93,7 +92,7 @@ export const OpeningsSection: React.FC = () => {
             Have a project instead of a job post? Use "Pitch an idea" — tell me what's broken
             and I'll tell you honestly if it's a fit.{" "}
             <a
-              href="mailto:hello@mainframe.co"
+              href="mailto:nuhailkhan836@icloud.com"
               className="text-white underline underline-offset-4 decoration-[var(--line-strong)] hover:decoration-white transition-colors"
             >
               Pitch an idea →

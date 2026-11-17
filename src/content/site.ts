@@ -26,7 +26,7 @@ export const site: {
   headline: "I turn repetitive work into systems that think, route, and act.",
   summary:
     "I'm Nuhail Iqbal. I design AI agents, workflow automations, and API-connected operations for agencies, SaaS teams, and real-estate businesses.",
-  availability: "Open to selected freelance projects and AI automation roles.",
+  availability: "Open to remote AI automation roles.",
   links: {
     linkedin: {
       label: "View LinkedIn",

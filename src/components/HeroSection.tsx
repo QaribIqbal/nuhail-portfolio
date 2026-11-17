@@ -81,7 +81,7 @@ export const HeroSection: React.FC = () => {
 
   const handleCopyEmail = async () => {
     try {
-      await navigator.clipboard.writeText("hello@mainframe.co");
+      await navigator.clipboard.writeText("nuhailkhan836@icloud.com");
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
@@ -92,7 +92,7 @@ export const HeroSection: React.FC = () => {
   const pillButtons = [
     { label: "Pitch an idea", href: "#openings", primary: true },
     { label: "Work with me", href: "#openings", primary: false },
-    { label: "Send a brief hello", href: "mailto:hello@mainframe.co", primary: false },
+    { label: "Send a brief hello", href: "mailto:nuhailkhan836@icloud.com", primary: false },
     { label: "See how I work", href: "#process", primary: false },
   ];
 
@@ -169,7 +169,7 @@ export const HeroSection: React.FC = () => {
               className="text-white hover:text-[var(--text-muted)] underline underline-offset-4 decoration-[var(--line-strong)] hover:decoration-white transition-colors cursor-pointer bg-transparent border-0 p-0"
               title="Click to copy email address"
             >
-              hello@mainframe.co
+              nuhailkhan836@icloud.com
             </button>
             {copied && (
               <span className="text-emerald-400 text-xs ml-1" role="status">

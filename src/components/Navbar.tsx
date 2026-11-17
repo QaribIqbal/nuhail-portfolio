@@ -165,7 +165,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
         {/* Footer info inside mobile menu */}
         <div className="pt-6 border-t border-[var(--line)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs font-mono text-[var(--text-dim)]">
           <span>NUHAIL IQBAL • AI AUTOMATION ENGINEER</span>
-          <span>hello@mainframe.co</span>
+          <span>nuhailkhan836@icloud.com</span>
         </div>
       </div>
     </>

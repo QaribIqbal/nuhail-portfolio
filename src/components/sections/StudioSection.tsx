@@ -4,12 +4,12 @@ import { useScrollReveal } from "../../hooks/useScrollReveal";
 const timeline = [
   {
     period: "Education",
-    detail: "Computer Science, GCU Lahore",
+    detail: "BS Computer Science, GCU Lahore — Completed 2024",
   },
   {
     period: "Current",
     detail:
-      "Independent AI automation work: agents, workflow systems, API integrations, delivery design. Building out automation systems at BriskDev alongside independent project work.",
+      "AI Agent & Automation Engineer at Brisk Dev / Parallel Metrics since 2024: AI agents, RAG knowledge assistants, VAPI voice agents, and Meta WhatsApp chatbots.",
   },
 ];
 
@@ -73,7 +73,7 @@ export const StudioSection: React.FC = () => {
             className="text-[var(--text-muted)] text-base sm:text-lg leading-relaxed mt-6"
             style={revealStyle(bioVisible, 80)}
           >
-            Currently building out automation systems at BriskDev, alongside independent project work.
+            Currently an AI Agent & Automation Engineer at Brisk Dev / Parallel Metrics.
           </p>
         </div>
 

@@ -54,17 +54,17 @@ export const Footer: React.FC = () => {
             <span>
               Reach me:{" "}
               <a
-                href="mailto:hello@mainframe.co"
+                href="mailto:nuhailkhan836@icloud.com"
                 className="text-white hover:text-[var(--text-muted)] transition-colors underline underline-offset-4 decoration-[var(--line-strong)]"
               >
-                hello@mainframe.co
+                nuhailkhan836@icloud.com
               </a>
             </span>
             <span className="hidden sm:inline text-[var(--text-dim)]" aria-hidden="true">
               ·
             </span>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/nuhail-iqbal-a93b1935b/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white hover:text-[var(--text-muted)] transition-colors"
