@@ -64,9 +64,29 @@ interface Project {
   link?: { label: string; href: string };
 }
 
-const projects: Project[] = [
+// Featured first: Geo Dash and Nexus are the live products.
+const featuredProjects: Project[] = [
   {
     num: "01",
+    title: "Geo Dash",
+    description:
+      "The AI SEO operating system for agencies: keyword research, competitor analysis, AI article drafts, images, client approvals, and WordPress publishing in one system.",
+    tags: ["AI SEO", "Keyword research", "WordPress"],
+    link: { label: "View project", href: "https://geodash.ai/" },
+  },
+  {
+    num: "02",
+    title: "Nexus | VAPI AI Missed-Call Follow-Up",
+    description:
+      "An AI calling workflow that identifies missed calls from integrated database records and initiates automated callbacks using VAPI.",
+    tags: ["VAPI", "Voice agents", "Supabase"],
+    link: { label: "View project", href: "https://admin.edmnexus.ai/" },
+  },
+];
+
+const smallProjects: Project[] = [
+  {
+    num: "03",
     title: "AI Lead Response for Real Estate",
     description: (
       <>
@@ -78,14 +98,14 @@ const projects: Project[] = [
     tags: ["n8n", "OpenAI", "HubSpot", "CRM routing"],
   },
   {
-    num: "02",
+    num: "04",
     title: "E-commerce AI Support Agent",
     description:
       "Built on Make.com and a vector knowledge base, this agent resolves the majority of incoming tickets on its own and cut response time from 48 hours to under a minute.",
     tags: ["Make.com", "Pinecone", "Zendesk"],
   },
   {
-    num: "03",
+    num: "05",
     title: "Legal Document Extraction Pipeline",
     description: (
       <>
@@ -97,41 +117,25 @@ const projects: Project[] = [
     tags: ["Python", "OpenAI API", "Salesforce"],
   },
   {
-    num: "04",
+    num: "06",
     title: "Agency Reporting Automation",
     description:
       "A scheduled workflow that reads structured client data, drafts account-specific updates, sends each report, and confirms delivery internally. No one has to remember report day again.",
     tags: ["Scheduled triggers", "Structured data", "Email delivery"],
   },
   {
-    num: "05",
+    num: "07",
     title: "WhatsApp Inquiry Assistant",
     description:
       "Handles what comes in at 11pm: FAQs, listing or inventory context, requirement capture, and escalation when it actually matters.",
     tags: ["WhatsApp API", "Conversational AI", "Escalation"],
   },
   {
-    num: "06",
+    num: "08",
     title: "Client Onboarding & Handoff",
     description:
       "Turns a closed deal into a fully set-up project: assets requested, owners assigned, CRM updated, team notified — automatically.",
     tags: ["Workflow orchestration", "CRM", "Notifications"],
-  },
-  {
-    num: "07",
-    title: "Geo Dash",
-    description:
-      "The AI SEO operating system for agencies: keyword research, competitor analysis, AI article drafts, images, client approvals, and WordPress publishing in one system.",
-    tags: ["AI SEO", "Keyword research", "WordPress"],
-    link: { label: "View project", href: "https://geodash.ai/" },
-  },
-  {
-    num: "08",
-    title: "Nexus | VAPI AI Missed-Call Follow-Up",
-    description:
-      "An AI calling workflow that identifies missed calls from integrated database records and initiates automated callbacks using VAPI.",
-    tags: ["VAPI", "Voice agents", "Supabase"],
-    link: { label: "View project", href: "https://admin.edmnexus.ai/" },
   },
 ];
 
@@ -223,37 +227,39 @@ export const LabsSection: React.FC = () => {
               ...revealStyle(gridHeaderVisible, 60),
             }}
           >
-            Eight systems,
-            <br className="hidden sm:block" /> eight real constraints.
+            Two flagship systems,
+            <br className="hidden sm:block" /> six more in the lab.
           </h2>
           <p
             className="text-[var(--text-muted)] text-base sm:text-lg max-w-xl mt-6 mb-12 leading-relaxed"
             style={revealStyle(gridHeaderVisible, 120)}
           >
-            Presented with the evidence level they actually have — some are live client builds,
-            some are demonstrations.
+            Geo Dash and Nexus are the live products. The rest are client builds and
+            demonstrations, presented with the evidence level they actually have.
           </p>
         </div>
 
-        {/* ── Card grid — first 3 ── */}
+        {/* ── Featured projects — Geo Dash & Nexus ── */}
         <div
           ref={grid1Ref}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-px"
           style={{ background: "var(--line)" }}
         >
-          {projects.slice(0, 3).map((project, i) => (
+          {featuredProjects.map((project, i) => (
             <article
               key={project.num}
-              className="bg-black p-6 sm:p-8 flex flex-col gap-4"
+              className="bg-black p-6 sm:p-10 flex flex-col gap-5"
               style={revealStyle(grid1Visible, i * 80)}
             >
               <CardImage num={project.num} />
-              <div className="flex flex-col gap-3 flex-1">
-                <span className="text-xs font-mono text-[var(--text-dim)]">{project.num} /</span>
-                <h3 className="font-heading text-white text-[15px] sm:text-[16px] leading-snug">
+              <div className="flex flex-col gap-4 flex-1">
+                <span className="text-xs font-mono text-[var(--text-dim)]">
+                  FEATURED / {project.num}
+                </span>
+                <h3 className="font-heading text-white text-[22px] sm:text-[26px] leading-snug">
                   {project.title}
                 </h3>
-                <p className="text-[var(--text-muted)] text-sm leading-relaxed flex-1">
+                <p className="text-[var(--text-muted)] text-base leading-relaxed flex-1">
                   {project.description}
                 </p>
                 <div className="flex flex-wrap gap-1.5">
@@ -266,23 +272,15 @@ export const LabsSection: React.FC = () => {
                     </span>
                   ))}
                 </div>
-                {project.link ? (
+                {project.link && (
                   <a
                     href={project.link.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-sm text-white hover:text-[var(--text-muted)] transition-colors mt-auto pt-2 inline-block"
+                    className="text-base text-white hover:text-[var(--text-muted)] transition-colors mt-auto pt-2 inline-block"
                     aria-label={`${project.link.label}: ${project.title}`}
                   >
                     {project.link.label} ↗
-                  </a>
-                ) : (
-                  <a
-                    href="#"
-                    className="text-sm text-white hover:text-[var(--text-muted)] transition-colors mt-auto pt-2 inline-block"
-                    aria-label={`Read the system: ${project.title}`}
-                  >
-                    Read the system →
                   </a>
                 )}
               </div>
@@ -290,71 +288,62 @@ export const LabsSection: React.FC = () => {
           ))}
         </div>
 
-        {/* ── Human aside after card 3 ── */}
+        {/* ── Small cards — the rest ── */}
         <p
-          className="px-6 sm:px-8 py-5 text-[var(--text-muted)] text-sm border-x border-b border-[var(--line)] italic"
+          className="text-xs font-mono uppercase tracking-widest text-[var(--text-dim)] mt-16 mb-6"
+          style={revealStyle(grid2Visible)}
+        >
+          MORE SYSTEMS
+        </p>
+        <div
+          ref={grid2Ref}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px"
+          style={{ background: "var(--line)" }}
+        >
+          {smallProjects.map((project, i) => (
+            <article
+              key={project.num}
+              className="bg-black p-5 sm:p-6 flex flex-col gap-3"
+              style={revealStyle(grid2Visible, i * 80)}
+            >
+              <span className="text-xs font-mono text-[var(--text-dim)]">{project.num} /</span>
+              <h3 className="font-heading text-white text-[15px] sm:text-[16px] leading-snug">
+                {project.title}
+              </h3>
+              <p className="text-[var(--text-muted)] text-sm leading-relaxed flex-1">
+                {project.description}
+              </p>
+              <div className="flex flex-wrap gap-1.5">
+                {project.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-[11px] font-mono px-2 py-0.5 border border-[var(--line-strong)] text-[var(--text-dim)] rounded-sm"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <a
+                href="#"
+                className="text-sm text-white hover:text-[var(--text-muted)] transition-colors mt-auto pt-2 inline-block"
+                aria-label={`Read the system: ${project.title}`}
+              >
+                Read the system →
+              </a>
+            </article>
+          ))}
+        </div>
+
+        {/* ── Human aside ── */}
+        <p
+          className="px-6 sm:px-8 py-5 text-[var(--text-muted)] text-sm border-x border-b border-[var(--line)] italic mt-px"
           style={{
-            opacity: grid1Visible ? 1 : 0,
+            opacity: grid2Visible ? 1 : 0,
             transition: "opacity 0.65s ease 300ms",
           }}
         >
           (That one taught me more about escalation logic than the degree did.)
         </p>
-
-        {/* ── Card grid — last 5 ── */}
-        <div
-          ref={grid2Ref}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px mt-px"
-          style={{ background: "var(--line)" }}
-        >
-          {projects.slice(3).map((project, i) => (
-            <article
-              key={project.num}
-              className="bg-black p-6 sm:p-8 flex flex-col gap-4"
-              style={revealStyle(grid2Visible, i * 80)}
-            >
-              <CardImage num={project.num} />
-              <div className="flex flex-col gap-3 flex-1">
-                <span className="text-xs font-mono text-[var(--text-dim)]">{project.num} /</span>
-                <h3 className="font-heading text-white text-[15px] sm:text-[16px] leading-snug">
-                  {project.title}
-                </h3>
-                <p className="text-[var(--text-muted)] text-sm leading-relaxed flex-1">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-1.5">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-[11px] font-mono px-2 py-0.5 border border-[var(--line-strong)] text-[var(--text-dim)] rounded-sm"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                {project.link ? (
-                  <a
-                    href={project.link.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-sm text-white hover:text-[var(--text-muted)] transition-colors mt-auto pt-2 inline-block"
-                    aria-label={`${project.link.label}: ${project.title}`}
-                  >
-                    {project.link.label} ↗
-                  </a>
-                ) : (
-                  <a
-                    href="#"
-                    className="text-sm text-white hover:text-[var(--text-muted)] transition-colors mt-auto pt-2 inline-block"
-                    aria-label={`Read the system: ${project.title}`}
-                  >
-                    Read the system →
-                  </a>
-                )}
-              </div>
-            </article>
-          ))}
-        </div>
       </div>
     </section>
   );
