@@ -61,6 +61,7 @@ interface Project {
   title: string;
   description: React.ReactNode;
   tags: string[];
+  link?: { label: string; href: string };
 }
 
 const projects: Project[] = [
@@ -115,6 +116,22 @@ const projects: Project[] = [
     description:
       "Turns a closed deal into a fully set-up project: assets requested, owners assigned, CRM updated, team notified — automatically.",
     tags: ["Workflow orchestration", "CRM", "Notifications"],
+  },
+  {
+    num: "07",
+    title: "Geo Dash",
+    description:
+      "The AI SEO operating system for agencies: keyword research, competitor analysis, AI article drafts, images, client approvals, and WordPress publishing in one system.",
+    tags: ["AI SEO", "Keyword research", "WordPress"],
+    link: { label: "View project", href: "https://geodash.ai/" },
+  },
+  {
+    num: "08",
+    title: "Nexus | VAPI AI Missed-Call Follow-Up",
+    description:
+      "An AI calling workflow that identifies missed calls from integrated database records and initiates automated callbacks using VAPI.",
+    tags: ["VAPI", "Voice agents", "Supabase"],
+    link: { label: "View project", href: "https://admin.edmnexus.ai/" },
   },
 ];
 
@@ -206,8 +223,8 @@ export const LabsSection: React.FC = () => {
               ...revealStyle(gridHeaderVisible, 60),
             }}
           >
-            Six systems,
-            <br className="hidden sm:block" /> six real constraints.
+            Eight systems,
+            <br className="hidden sm:block" /> eight real constraints.
           </h2>
           <p
             className="text-[var(--text-muted)] text-base sm:text-lg max-w-xl mt-6 mb-12 leading-relaxed"
@@ -249,13 +266,25 @@ export const LabsSection: React.FC = () => {
                     </span>
                   ))}
                 </div>
-                <a
-                  href="#"
-                  className="text-sm text-white hover:text-[var(--text-muted)] transition-colors mt-auto pt-2 inline-block"
-                  aria-label={`Read the system: ${project.title}`}
-                >
-                  Read the system →
-                </a>
+                {project.link ? (
+                  <a
+                    href={project.link.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-sm text-white hover:text-[var(--text-muted)] transition-colors mt-auto pt-2 inline-block"
+                    aria-label={`${project.link.label}: ${project.title}`}
+                  >
+                    {project.link.label} ↗
+                  </a>
+                ) : (
+                  <a
+                    href="#"
+                    className="text-sm text-white hover:text-[var(--text-muted)] transition-colors mt-auto pt-2 inline-block"
+                    aria-label={`Read the system: ${project.title}`}
+                  >
+                    Read the system →
+                  </a>
+                )}
               </div>
             </article>
           ))}
@@ -272,7 +301,7 @@ export const LabsSection: React.FC = () => {
           (That one taught me more about escalation logic than the degree did.)
         </p>
 
-        {/* ── Card grid — last 3 ── */}
+        {/* ── Card grid — last 5 ── */}
         <div
           ref={grid2Ref}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px mt-px"
@@ -303,13 +332,25 @@ export const LabsSection: React.FC = () => {
                     </span>
                   ))}
                 </div>
-                <a
-                  href="#"
-                  className="text-sm text-white hover:text-[var(--text-muted)] transition-colors mt-auto pt-2 inline-block"
-                  aria-label={`Read the system: ${project.title}`}
-                >
-                  Read the system →
-                </a>
+                {project.link ? (
+                  <a
+                    href={project.link.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-sm text-white hover:text-[var(--text-muted)] transition-colors mt-auto pt-2 inline-block"
+                    aria-label={`${project.link.label}: ${project.title}`}
+                  >
+                    {project.link.label} ↗
+                  </a>
+                ) : (
+                  <a
+                    href="#"
+                    className="text-sm text-white hover:text-[var(--text-muted)] transition-colors mt-auto pt-2 inline-block"
+                    aria-label={`Read the system: ${project.title}`}
+                  >
+                    Read the system →
+                  </a>
+                )}
               </div>
             </article>
           ))}

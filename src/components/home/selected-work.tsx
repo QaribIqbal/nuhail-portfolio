@@ -27,7 +27,7 @@ export function SelectedWork() {
         ))}
       </div>
       <div aria-label="Supporting projects" className="horizontal-rail mt-5 flex snap-x snap-mandatory gap-px overflow-x-auto border border-[var(--line)] bg-[var(--line)] md:grid md:grid-cols-2" role="region" tabIndex={0}>
-        {supportingProjects.map((project) => <article className="w-[86%] shrink-0 snap-start bg-[var(--ink)] p-6 md:w-auto md:p-8" key={project.slug}><p className="eyebrow">{project.status}</p><h3 className="mt-4 text-2xl font-semibold tracking-[-0.04em]">{project.title}</h3><p className="mt-3 leading-7 text-[var(--text-muted)]">{project.summary}</p><p className="mt-6 text-xs uppercase tracking-[.12em] text-[var(--text-muted)]">{project.capabilities.join(" · ")}</p></article>)}
+        {supportingProjects.map((project) => <article className="w-[86%] shrink-0 snap-start bg-[var(--ink)] p-6 md:w-auto md:p-8" key={project.slug}><p className="eyebrow">{project.status}</p><h3 className="mt-4 text-2xl font-semibold tracking-[-0.04em]">{project.title}</h3><p className="mt-3 leading-7 text-[var(--text-muted)]">{project.summary}</p><p className="mt-6 text-xs uppercase tracking-[.12em] text-[var(--text-muted)]">{project.capabilities.join(" · ")}</p>{project.externalDemo ? <a className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-[var(--signal)]" href={project.externalDemo.href} rel="noreferrer" target="_blank">{project.externalDemo.label} <ArrowUpRight size={16} weight="bold" /></a> : null}</article>)}
       </div>
     </section>
   );

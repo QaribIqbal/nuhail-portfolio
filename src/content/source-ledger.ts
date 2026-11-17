@@ -56,6 +56,16 @@ export const sourceLedger: readonly SourceLedgerEntry[] = [
     publicationNote: "Every card carries its evidence label.",
   },
   {
+    id: "nexus-missed-call-follow-up",
+    statement:
+      "Nexus is a VAPI AI missed-call follow-up system that identifies missed calls from integrated database records and initiates automated callbacks.",
+    evidenceKind: "demonstration",
+    sourceLabel: "EDM Nexus admin dashboard",
+    sourceUrl: "https://admin.edmnexus.ai/",
+    publish: true,
+    publicationNote: "Presented as a product demo; the dashboard is login-gated.",
+  },
+  {
     id: "stack",
     statement:
       "The documented automation stack includes Make, n8n, Zapier, Airtable, APIs, and custom code.",
