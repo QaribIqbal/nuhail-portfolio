@@ -66,6 +66,16 @@ export const sourceLedger: readonly SourceLedgerEntry[] = [
     publicationNote: "Presented as a product demo; the dashboard is login-gated.",
   },
   {
+    id: "chatbot-hub-rag",
+    statement:
+      "ChatBot Hub is a RAG knowledge chatbot in n8n: a retrieval pipeline answers questions from a Pinecone vector store and an ingestion pipeline loads the knowledge base.",
+    evidenceKind: "demonstration",
+    sourceLabel: "ChatBot Hub on GitHub",
+    sourceUrl: "https://github.com/NuhailIqbal/chatbot-hub",
+    publish: true,
+    publicationNote: "Presented as a product demo; the public repo carries sample data only.",
+  },
+  {
     id: "stack",
     statement:
       "The documented automation stack includes Make, n8n, Zapier, Airtable, APIs, and custom code.",

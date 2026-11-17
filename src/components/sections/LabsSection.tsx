@@ -137,6 +137,14 @@ const smallProjects: Project[] = [
       "Turns a closed deal into a fully set-up project: assets requested, owners assigned, CRM updated, team notified — automatically.",
     tags: ["Workflow orchestration", "CRM", "Notifications"],
   },
+  {
+    num: "09",
+    title: "ChatBot Hub — RAG Knowledge Chatbot",
+    description:
+      "A RAG support chatbot in n8n: the retrieval pipeline answers questions from a Pinecone vector store, and the ingestion pipeline loads the knowledge base. OpenRouter model, HuggingFace embeddings, 10-message memory.",
+    tags: ["n8n", "RAG", "Pinecone"],
+    link: { label: "View project", href: "https://github.com/NuhailIqbal/chatbot-hub" },
+  },
 ];
 
 export const LabsSection: React.FC = () => {
@@ -228,7 +236,7 @@ export const LabsSection: React.FC = () => {
             }}
           >
             Two flagship systems,
-            <br className="hidden sm:block" /> six more in the lab.
+            <br className="hidden sm:block" /> seven more in the lab.
           </h2>
           <p
             className="text-[var(--text-muted)] text-base sm:text-lg max-w-xl mt-6 mb-12 leading-relaxed"
@@ -323,13 +331,25 @@ export const LabsSection: React.FC = () => {
                   </span>
                 ))}
               </div>
-              <a
-                href="#"
-                className="text-sm text-white hover:text-[var(--text-muted)] transition-colors mt-auto pt-2 inline-block"
-                aria-label={`Read the system: ${project.title}`}
-              >
-                Read the system →
-              </a>
+              {project.link ? (
+                <a
+                  href={project.link.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-sm text-white hover:text-[var(--text-muted)] transition-colors mt-auto pt-2 inline-block"
+                  aria-label={`${project.link.label}: ${project.title}`}
+                >
+                  {project.link.label} ↗
+                </a>
+              ) : (
+                <a
+                  href="#"
+                  className="text-sm text-white hover:text-[var(--text-muted)] transition-colors mt-auto pt-2 inline-block"
+                  aria-label={`Read the system: ${project.title}`}
+                >
+                  Read the system →
+                </a>
+              )}
             </article>
           ))}
         </div>
