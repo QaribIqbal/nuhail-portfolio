@@ -33,6 +33,30 @@ const CardImage: React.FC<{ num: string }> = ({ num }) => (
   </div>
 );
 
+// Real workflow screenshot over the abstract art. The screenshot file lives in
+// the project's own GitHub repo (docs/workflow.png); until it is uploaded there
+// the image hides itself and the abstract art shows instead — no broken image.
+const CardScreenshot: React.FC<{ image: { src: string; alt: string }; num: string }> = ({
+  image,
+  num,
+}) => (
+  <div className="relative w-full aspect-video overflow-hidden select-none" style={{ background: "var(--surface-soft)" }}>
+    <div className="absolute inset-0">
+      <CardImage num={num} />
+    </div>
+    {/* eslint-disable-next-line @next/next/no-img-element */}
+    <img
+      src={image.src}
+      alt={image.alt}
+      loading="lazy"
+      className="absolute inset-0 h-full w-full object-contain"
+      onError={(e) => {
+        e.currentTarget.style.display = "none";
+      }}
+    />
+  </div>
+);
+
 const capabilities = [
   {
     title: "AI & Agents",
@@ -62,6 +86,7 @@ interface Project {
   description: React.ReactNode;
   tags: string[];
   link?: { label: string; href: string };
+  image?: { src: string; alt: string };
 }
 
 // Featured first: Geo Dash and Nexus are the live products.
@@ -144,6 +169,10 @@ const smallProjects: Project[] = [
       "A RAG support chatbot in n8n: the retrieval pipeline answers questions from a Pinecone vector store, and the ingestion pipeline loads the knowledge base. OpenRouter model, HuggingFace embeddings, 10-message memory.",
     tags: ["n8n", "RAG", "Pinecone"],
     link: { label: "View project", href: "https://github.com/NuhailIqbal/chatbot-hub" },
+    image: {
+      src: "https://raw.githubusercontent.com/NuhailIqbal/chatbot-hub/main/docs/workflow.png",
+      alt: "ChatBot Hub n8n workflow — retrieval pipeline with Pinecone vector store and ingestion pipeline",
+    },
   },
   {
     num: "10",
@@ -152,6 +181,10 @@ const smallProjects: Project[] = [
       "A human-in-the-loop LinkedIn outreach workflow in n8n: leads CSV in, PhantomBuster researches each lead's latest post, Gemini drafts a personal DM, and nothing sends until a human approves it by email. Daily limits, duplicate guards, and reply tracking.",
     tags: ["n8n", "Gemini", "Unipile"],
     link: { label: "View project", href: "https://github.com/NuhailIqbal/Linked-IN-Automation" },
+    image: {
+      src: "https://raw.githubusercontent.com/NuhailIqbal/Linked-IN-Automation/main/docs/workflow.png",
+      alt: "LinkedIn DM Automation n8n workflow — lead research, Gemini draft, human approval gate",
+    },
   },
 ];
 
@@ -322,6 +355,7 @@ export const LabsSection: React.FC = () => {
               className="bg-black p-5 sm:p-6 flex flex-col gap-3"
               style={revealStyle(grid2Visible, i * 80)}
             >
+              {project.image ? <CardScreenshot image={project.image} num={project.num} /> : null}
               <span className="text-xs font-mono text-[var(--text-dim)]">{project.num} /</span>
               <h3 className="font-heading text-white text-[15px] sm:text-[16px] leading-snug">
                 {project.title}
