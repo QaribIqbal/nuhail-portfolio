@@ -145,6 +145,14 @@ const smallProjects: Project[] = [
     tags: ["n8n", "RAG", "Pinecone"],
     link: { label: "View project", href: "https://github.com/NuhailIqbal/chatbot-hub" },
   },
+  {
+    num: "10",
+    title: "LinkedIn DM Automation — Human-in-the-Loop Outreach",
+    description:
+      "A human-in-the-loop LinkedIn outreach workflow in n8n: leads CSV in, PhantomBuster researches each lead's latest post, Gemini drafts a personal DM, and nothing sends until a human approves it by email. Daily limits, duplicate guards, and reply tracking.",
+    tags: ["n8n", "Gemini", "Unipile"],
+    link: { label: "View project", href: "https://github.com/NuhailIqbal/Linked-IN-Automation" },
+  },
 ];
 
 export const LabsSection: React.FC = () => {
@@ -236,7 +244,7 @@ export const LabsSection: React.FC = () => {
             }}
           >
             Two flagship systems,
-            <br className="hidden sm:block" /> seven more in the lab.
+            <br className="hidden sm:block" /> eight more in the lab.
           </h2>
           <p
             className="text-[var(--text-muted)] text-base sm:text-lg max-w-xl mt-6 mb-12 leading-relaxed"

@@ -76,6 +76,16 @@ export const sourceLedger: readonly SourceLedgerEntry[] = [
     publicationNote: "Presented as a product demo; the public repo carries sample data only.",
   },
   {
+    id: "linkedin-dm-automation",
+    statement:
+      "LinkedIn DM Automation is a human-in-the-loop outreach workflow in n8n: a leads CSV is researched with PhantomBuster, a personal DM is drafted with Gemini, and nothing sends until a human approves it by email.",
+    evidenceKind: "demonstration",
+    sourceLabel: "LinkedIn DM Automation on GitHub",
+    sourceUrl: "https://github.com/NuhailIqbal/Linked-IN-Automation",
+    publish: true,
+    publicationNote: "Presented as a product demo; the public repo carries sample data only.",
+  },
+  {
     id: "stack",
     statement:
       "The documented automation stack includes Make, n8n, Zapier, Airtable, APIs, and custom code.",
