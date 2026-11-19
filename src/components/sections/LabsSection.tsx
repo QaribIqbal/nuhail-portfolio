@@ -190,6 +190,18 @@ const smallProjects: Project[] = [
       alt: "LinkedIn DM Automation n8n workflow — lead research, Gemini draft, human approval gate",
     },
   },
+  {
+    num: "11",
+    title: "Article Hub — AI Article Generation",
+    description:
+      "An AI article-generation system in n8n: single-article and bulk generation with live Perplexity research, SEO-ready output, and AI-generated images — the pipeline behind onboarding a client onto a content platform.",
+    tags: ["n8n", "Claude", "Perplexity"],
+    link: { label: "View project", href: "https://github.com/NuhailIqbal/Article-Hub" },
+    image: {
+      src: "https://raw.githubusercontent.com/NuhailIqbal/Article-Hub/main/docs/workflow.png",
+      alt: "Article Hub n8n workflow — article generation with live research and image generation",
+    },
+  },
 ];
 
 export const LabsSection: React.FC = () => {
@@ -281,7 +293,7 @@ export const LabsSection: React.FC = () => {
             }}
           >
             Two flagship systems,
-            <br className="hidden sm:block" /> eight more in the lab.
+            <br className="hidden sm:block" /> nine more in the lab.
           </h2>
           <p
             className="text-[var(--text-muted)] text-base sm:text-lg max-w-xl mt-6 mb-12 leading-relaxed"
