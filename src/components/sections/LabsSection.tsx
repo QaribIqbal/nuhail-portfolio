@@ -33,6 +33,30 @@ const CardImage: React.FC<{ num: string }> = ({ num }) => (
   </div>
 );
 
+// Real workflow screenshot over the abstract art. The screenshot file lives in
+// the project's own GitHub repo (docs/workflow.png); until it is uploaded there
+// the image hides itself and the abstract art shows instead — no broken image.
+const CardScreenshot: React.FC<{ image: { src: string; alt: string }; num: string }> = ({
+  image,
+  num,
+}) => (
+  <div className="relative w-full aspect-video overflow-hidden select-none" style={{ background: "var(--surface-soft)" }}>
+    <div className="absolute inset-0">
+      <CardImage num={num} />
+    </div>
+    {/* eslint-disable-next-line @next/next/no-img-element */}
+    <img
+      src={image.src}
+      alt={image.alt}
+      loading="lazy"
+      className="absolute inset-0 h-full w-full object-contain"
+      onError={(e) => {
+        e.currentTarget.style.display = "none";
+      }}
+    />
+  </div>
+);
+
 const capabilities = [
   {
     title: "AI & Agents",
@@ -74,8 +98,11 @@ const featuredProjects: Project[] = [
     description:
       "The AI SEO operating system for agencies: keyword research, competitor analysis, AI article drafts, images, client approvals, and WordPress publishing in one system.",
     tags: ["AI SEO", "Keyword research", "WordPress"],
-    link: { label: "View project", href: "https://geodash.ai/" },
     demoLink: { label: "Watch demo", href: "https://youtu.be/4ITqJ0UWNVs" },
+    image: {
+      src: "/media/geodash-card.jpg",
+      alt: "Geo Dash dashboard — keyword research for a client",
+    },
   },
   {
     num: "02",
@@ -84,6 +111,10 @@ const featuredProjects: Project[] = [
       "An AI calling workflow that identifies missed calls from integrated database records and initiates automated callbacks using VAPI.",
     tags: ["VAPI", "Voice agents", "Supabase"],
     demoLink: { label: "Watch demo", href: "https://youtu.be/8fhhPkKQ67o" },
+    image: {
+      src: "/media/vapi-voice-agent-card.jpg",
+      alt: "VAPI voice agent Sarah in a live test call",
+    },
   },
   {
     num: "03",
@@ -93,6 +124,10 @@ const featuredProjects: Project[] = [
     tags: ["n8n", "RAG", "Pinecone"],
     link: { label: "View project", href: "https://github.com/NuhailIqbal/chatbot-hub" },
     demoLink: { label: "Watch demo", href: "https://youtu.be/vbiD_IE2NfM" },
+    image: {
+      src: "https://raw.githubusercontent.com/NuhailIqbal/chatbot-hub/main/docs/workflow.png",
+      alt: "ChatBot Hub n8n workflow — retrieval pipeline with Pinecone vector store and ingestion pipeline",
+    },
   },
 ];
 
@@ -105,6 +140,10 @@ const codeProjects: Project[] = [
       "A human-in-the-loop LinkedIn outreach workflow in n8n: leads CSV in, PhantomBuster researches each lead's latest post, Gemini drafts a personal DM, and nothing sends until a human approves it by email. Daily limits, duplicate guards, and reply tracking.",
     tags: ["n8n", "Gemini", "Unipile"],
     link: { label: "View project", href: "https://github.com/NuhailIqbal/Linked-IN-Automation" },
+    image: {
+      src: "https://raw.githubusercontent.com/NuhailIqbal/Linked-IN-Automation/main/docs/workflow.png",
+      alt: "LinkedIn DM Automation n8n workflow — lead research, Gemini draft, human approval gate",
+    },
   },
   {
     num: "05",
@@ -113,6 +152,10 @@ const codeProjects: Project[] = [
       "An AI article-generation system in n8n: single-article and bulk generation with live Perplexity research, SEO-ready output, and AI-generated images — the pipeline behind onboarding a client onto a content platform.",
     tags: ["n8n", "Claude", "Perplexity"],
     link: { label: "View project", href: "https://github.com/NuhailIqbal/Article-Hub" },
+    image: {
+      src: "https://raw.githubusercontent.com/NuhailIqbal/Article-Hub/main/docs/workflow.png",
+      alt: "Article Hub n8n workflow — article generation with live research and image generation",
+    },
   },
 ];
 
@@ -286,7 +329,7 @@ export const LabsSection: React.FC = () => {
               className="bg-black p-6 sm:p-10 flex flex-col gap-5"
               style={revealStyle(grid1Visible, i * 80)}
             >
-              <CardImage num={project.num} />
+              {project.image ? <CardScreenshot image={project.image} num={project.num} /> : <CardImage num={project.num} />}
               <div className="flex flex-col gap-4 flex-1">
                 <span className="text-xs font-mono text-[var(--text-dim)]">
                   FEATURED / {project.num}
@@ -352,7 +395,7 @@ export const LabsSection: React.FC = () => {
               className="bg-black p-5 sm:p-6 flex flex-col gap-3"
               style={revealStyle(grid2Visible, i * 80)}
             >
-              <CardImage num={project.num} />
+              {project.image ? <CardScreenshot image={project.image} num={project.num} /> : null}
               <span className="text-xs font-mono text-[var(--text-dim)]">{project.num} /</span>
               <h3 className="font-heading text-white text-[15px] sm:text-[16px] leading-snug">
                 {project.title}
@@ -414,7 +457,7 @@ export const LabsSection: React.FC = () => {
               className="bg-black p-5 sm:p-6 flex flex-col gap-3"
               style={revealStyle(grid3Visible, i * 80)}
             >
-              <CardImage num={project.num} />
+              {project.image ? <CardScreenshot image={project.image} num={project.num} /> : null}
               <span className="text-xs font-mono text-[var(--text-dim)]">{project.num} /</span>
               <h3 className="font-heading text-white text-[15px] sm:text-[16px] leading-snug">
                 {project.title}
