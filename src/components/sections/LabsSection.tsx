@@ -100,15 +100,23 @@ const featuredProjects: Project[] = [
     tags: ["AI SEO", "Keyword research", "WordPress"],
     link: { label: "View project", href: "https://geodash.ai/" },
     demoLink: { label: "Watch demo", href: "https://youtu.be/4ITqJ0UWNVs" },
+    image: {
+      src: "/media/geodash-card.jpg",
+      alt: "Geo Dash dashboard — keyword research for a client",
+    },
   },
   {
     num: "02",
-    title: "Nexus | VAPI AI Missed-Call Follow-Up",
+    title: "VAPI AI Missed-Call Follow-Up",
     description:
       "An AI calling workflow that identifies missed calls from integrated database records and initiates automated callbacks using VAPI.",
     tags: ["VAPI", "Voice agents", "Supabase"],
     link: { label: "View project", href: "https://admin.edmnexus.ai/" },
     demoLink: { label: "Watch demo", href: "https://youtu.be/8fhhPkKQ67o" },
+    image: {
+      src: "/media/vapi-voice-agent-card.jpg",
+      alt: "VAPI voice agent Sarah in a live test call",
+    },
   },
   {
     num: "03",
@@ -305,7 +313,7 @@ export const LabsSection: React.FC = () => {
             className="text-[var(--text-muted)] text-base sm:text-lg max-w-xl mt-6 mb-12 leading-relaxed"
             style={revealStyle(gridHeaderVisible, 120)}
           >
-            Geo Dash, Nexus and ChatBot Hub each have a recorded demo. LinkedIn DM Automation and
+            Geo Dash, the VAPI voice agent and ChatBot Hub each have a recorded demo. LinkedIn DM Automation and
             Article Hub are open source on GitHub — read the workflow, not just the pitch. The rest
             are client builds, presented with the evidence level they actually have.
           </p>
@@ -314,7 +322,7 @@ export const LabsSection: React.FC = () => {
         {/* ── Tier 1 — projects with a demo video ── */}
         <div
           ref={grid1Ref}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-px"
+          className="grid grid-cols-1 lg:grid-cols-3 gap-px"
           style={{ background: "var(--line)" }}
         >
           {featuredProjects.map((project, i) => (
