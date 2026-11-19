@@ -388,7 +388,7 @@ export const LabsSection: React.FC = () => {
                   </span>
                 ))}
               </div>
-              {project.link ? (
+              {project.link && (
                 <a
                   href={project.link.href}
                   target="_blank"
@@ -397,14 +397,6 @@ export const LabsSection: React.FC = () => {
                   aria-label={`${project.link.label}: ${project.title}`}
                 >
                   {project.link.label} ↗
-                </a>
-              ) : (
-                <a
-                  href="#"
-                  className="text-sm text-white hover:text-[var(--text-muted)] transition-colors mt-auto pt-2 inline-block"
-                  aria-label={`Read the system: ${project.title}`}
-                >
-                  Read the system →
                 </a>
               )}
               {project.demoLink && (
