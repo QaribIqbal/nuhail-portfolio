@@ -8,7 +8,7 @@ function ProjectDiagram({ index, src, alt }: { index: number; src: string; alt: 
   return <div className="grid-field relative aspect-[16/8.5] overflow-hidden border-b border-[var(--line)]"><Image alt={alt} className="object-cover opacity-70 transition duration-700 group-hover:scale-[1.045] group-hover:opacity-90" fill loading={index === 0 ? "eager" : "lazy"} sizes="(min-width: 1024px) 50vw, 100vw" src={src} /><span className="absolute inset-0 bg-[linear-gradient(0deg,rgba(7,9,13,.55),transparent_65%)]" /><span className="absolute left-6 top-6 font-mono text-xs text-[var(--signal)]">0{index + 1} / SYSTEM</span></div>;
 }
 
-const featuredSlugs = ["geo-dash", "nexus"];
+const featuredSlugs = ["geo-dash", "nexus", "chatbot-hub"];
 const featuredProjects = supportingProjects.filter((project) => featuredSlugs.includes(project.slug));
 const otherProjects = supportingProjects.filter((project) => !featuredSlugs.includes(project.slug));
 

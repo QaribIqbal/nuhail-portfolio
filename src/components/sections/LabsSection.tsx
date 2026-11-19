@@ -90,7 +90,7 @@ interface Project {
   image?: { src: string; alt: string };
 }
 
-// Featured first: Geo Dash and Nexus are the live products.
+// Tier 1 — watch the demo: every project here has a recorded demo video.
 const featuredProjects: Project[] = [
   {
     num: "01",
@@ -110,63 +110,8 @@ const featuredProjects: Project[] = [
     link: { label: "View project", href: "https://admin.edmnexus.ai/" },
     demoLink: { label: "Watch demo", href: "https://youtu.be/8fhhPkKQ67o" },
   },
-];
-
-const smallProjects: Project[] = [
   {
     num: "03",
-    title: "AI Lead Response for Real Estate",
-    description: (
-      <>
-        A voice-and-chat intake that qualifies buyers by budget and timeline, books the next step,
-        and hands unusual requests straight to a human. Replaced{" "}
-        <CountUp to={80} suffix="+" /> hours a month of manual work and a $400/month subscription tool.
-      </>
-    ),
-    tags: ["n8n", "OpenAI", "HubSpot", "CRM routing"],
-  },
-  {
-    num: "04",
-    title: "E-commerce AI Support Agent",
-    description:
-      "Built on Make.com and a vector knowledge base, this agent resolves the majority of incoming tickets on its own and cut response time from 48 hours to under a minute.",
-    tags: ["Make.com", "Pinecone", "Zendesk"],
-  },
-  {
-    num: "05",
-    title: "Legal Document Extraction Pipeline",
-    description: (
-      <>
-        A Python and OpenAI pipeline that reads and structures{" "}
-        <CountUp to={500} suffix="+" /> contracts a month, cutting manual review time by{" "}
-        <CountUp to={90} suffix="%" />.
-      </>
-    ),
-    tags: ["Python", "OpenAI API", "Salesforce"],
-  },
-  {
-    num: "06",
-    title: "Agency Reporting Automation",
-    description:
-      "A scheduled workflow that reads structured client data, drafts account-specific updates, sends each report, and confirms delivery internally. No one has to remember report day again.",
-    tags: ["Scheduled triggers", "Structured data", "Email delivery"],
-  },
-  {
-    num: "07",
-    title: "WhatsApp Inquiry Assistant",
-    description:
-      "Handles what comes in at 11pm: FAQs, listing or inventory context, requirement capture, and escalation when it actually matters.",
-    tags: ["WhatsApp API", "Conversational AI", "Escalation"],
-  },
-  {
-    num: "08",
-    title: "Client Onboarding & Handoff",
-    description:
-      "Turns a closed deal into a fully set-up project: assets requested, owners assigned, CRM updated, team notified — automatically.",
-    tags: ["Workflow orchestration", "CRM", "Notifications"],
-  },
-  {
-    num: "09",
     title: "ChatBot Hub — RAG Knowledge Chatbot",
     description:
       "A RAG support chatbot in n8n: the retrieval pipeline answers questions from a Pinecone vector store, and the ingestion pipeline loads the knowledge base. OpenRouter model, HuggingFace embeddings, 10-message memory.",
@@ -178,8 +123,12 @@ const smallProjects: Project[] = [
       alt: "ChatBot Hub n8n workflow — retrieval pipeline with Pinecone vector store and ingestion pipeline",
     },
   },
+];
+
+// Tier 2 — read the source: open on GitHub, workflow screenshot included.
+const codeProjects: Project[] = [
   {
-    num: "10",
+    num: "04",
     title: "LinkedIn DM Automation — Human-in-the-Loop Outreach",
     description:
       "A human-in-the-loop LinkedIn outreach workflow in n8n: leads CSV in, PhantomBuster researches each lead's latest post, Gemini drafts a personal DM, and nothing sends until a human approves it by email. Daily limits, duplicate guards, and reply tracking.",
@@ -191,7 +140,7 @@ const smallProjects: Project[] = [
     },
   },
   {
-    num: "11",
+    num: "05",
     title: "Article Hub — AI Article Generation",
     description:
       "An AI article-generation system in n8n: single-article and bulk generation with live Perplexity research, SEO-ready output, and AI-generated images — the pipeline behind onboarding a client onto a content platform.",
@@ -204,11 +153,68 @@ const smallProjects: Project[] = [
   },
 ];
 
+// Tier 3 — client builds, presented with the evidence level they actually have.
+const smallProjects: Project[] = [
+  {
+    num: "06",
+    title: "AI Lead Response for Real Estate",
+    description: (
+      <>
+        A voice-and-chat intake that qualifies buyers by budget and timeline, books the next step,
+        and hands unusual requests straight to a human. Replaced{" "}
+        <CountUp to={80} suffix="+" /> hours a month of manual work and a $400/month subscription tool.
+      </>
+    ),
+    tags: ["n8n", "OpenAI", "HubSpot", "CRM routing"],
+  },
+  {
+    num: "07",
+    title: "E-commerce AI Support Agent",
+    description:
+      "Built on Make.com and a vector knowledge base, this agent resolves the majority of incoming tickets on its own and cut response time from 48 hours to under a minute.",
+    tags: ["Make.com", "Pinecone", "Zendesk"],
+  },
+  {
+    num: "08",
+    title: "Legal Document Extraction Pipeline",
+    description: (
+      <>
+        A Python and OpenAI pipeline that reads and structures{" "}
+        <CountUp to={500} suffix="+" /> contracts a month, cutting manual review time by{" "}
+        <CountUp to={90} suffix="%" />.
+      </>
+    ),
+    tags: ["Python", "OpenAI API", "Salesforce"],
+  },
+  {
+    num: "09",
+    title: "Agency Reporting Automation",
+    description:
+      "A scheduled workflow that reads structured client data, drafts account-specific updates, sends each report, and confirms delivery internally. No one has to remember report day again.",
+    tags: ["Scheduled triggers", "Structured data", "Email delivery"],
+  },
+  {
+    num: "10",
+    title: "WhatsApp Inquiry Assistant",
+    description:
+      "Handles what comes in at 11pm: FAQs, listing or inventory context, requirement capture, and escalation when it actually matters.",
+    tags: ["WhatsApp API", "Conversational AI", "Escalation"],
+  },
+  {
+    num: "11",
+    title: "Client Onboarding & Handoff",
+    description:
+      "Turns a closed deal into a fully set-up project: assets requested, owners assigned, CRM updated, team notified — automatically.",
+    tags: ["Workflow orchestration", "CRM", "Notifications"],
+  },
+];
+
 export const LabsSection: React.FC = () => {
   const { ref: capRef, visible: capVisible } = useScrollReveal(0.05);
   const { ref: gridHeaderRef, visible: gridHeaderVisible } = useScrollReveal(0.05);
   const { ref: grid1Ref, visible: grid1Visible } = useScrollReveal(0.03);
   const { ref: grid2Ref, visible: grid2Visible } = useScrollReveal(0.03);
+  const { ref: grid3Ref, visible: grid3Visible } = useScrollReveal(0.03);
 
   const revealStyle = (visible: boolean, delay = 0): React.CSSProperties => ({
     opacity: visible ? 1 : 0,
@@ -292,19 +298,20 @@ export const LabsSection: React.FC = () => {
               ...revealStyle(gridHeaderVisible, 60),
             }}
           >
-            Two flagship systems,
-            <br className="hidden sm:block" /> nine more in the lab.
+            Three you can watch,
+            <br className="hidden sm:block" /> two you can read, six more in the lab.
           </h2>
           <p
             className="text-[var(--text-muted)] text-base sm:text-lg max-w-xl mt-6 mb-12 leading-relaxed"
             style={revealStyle(gridHeaderVisible, 120)}
           >
-            Geo Dash and Nexus are the live products. The rest are client builds and
-            demonstrations, presented with the evidence level they actually have.
+            Geo Dash, Nexus and ChatBot Hub each have a recorded demo. LinkedIn DM Automation and
+            Article Hub are open source on GitHub — read the workflow, not just the pitch. The rest
+            are client builds, presented with the evidence level they actually have.
           </p>
         </div>
 
-        {/* ── Featured projects — Geo Dash & Nexus ── */}
+        {/* ── Tier 1 — projects with a demo video ── */}
         <div
           ref={grid1Ref}
           className="grid grid-cols-1 lg:grid-cols-2 gap-px"
@@ -316,7 +323,7 @@ export const LabsSection: React.FC = () => {
               className="bg-black p-6 sm:p-10 flex flex-col gap-5"
               style={revealStyle(grid1Visible, i * 80)}
             >
-              <CardImage num={project.num} />
+              {project.image ? <CardScreenshot image={project.image} num={project.num} /> : <CardImage num={project.num} />}
               <div className="flex flex-col gap-4 flex-1">
                 <span className="text-xs font-mono text-[var(--text-dim)]">
                   FEATURED / {project.num}
@@ -364,19 +371,19 @@ export const LabsSection: React.FC = () => {
           ))}
         </div>
 
-        {/* ── Small cards — the rest ── */}
+        {/* ── Tier 2 — open source on GitHub ── */}
         <p
           className="text-xs font-mono uppercase tracking-widest text-[var(--text-dim)] mt-16 mb-6"
           style={revealStyle(grid2Visible)}
         >
-          MORE SYSTEMS
+          SOURCE CODE
         </p>
         <div
           ref={grid2Ref}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-px"
           style={{ background: "var(--line)" }}
         >
-          {smallProjects.map((project, i) => (
+          {codeProjects.map((project, i) => (
             <article
               key={project.num}
               className="bg-black p-5 sm:p-6 flex flex-col gap-3"
@@ -426,11 +433,73 @@ export const LabsSection: React.FC = () => {
           ))}
         </div>
 
+        {/* ── Tier 3 — the rest ── */}
+        <p
+          className="text-xs font-mono uppercase tracking-widest text-[var(--text-dim)] mt-16 mb-6"
+          style={revealStyle(grid3Visible)}
+        >
+          MORE SYSTEMS
+        </p>
+        <div
+          ref={grid3Ref}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px"
+          style={{ background: "var(--line)" }}
+        >
+          {smallProjects.map((project, i) => (
+            <article
+              key={project.num}
+              className="bg-black p-5 sm:p-6 flex flex-col gap-3"
+              style={revealStyle(grid3Visible, i * 80)}
+            >
+              {project.image ? <CardScreenshot image={project.image} num={project.num} /> : null}
+              <span className="text-xs font-mono text-[var(--text-dim)]">{project.num} /</span>
+              <h3 className="font-heading text-white text-[15px] sm:text-[16px] leading-snug">
+                {project.title}
+              </h3>
+              <p className="text-[var(--text-muted)] text-sm leading-relaxed flex-1">
+                {project.description}
+              </p>
+              <div className="flex flex-wrap gap-1.5">
+                {project.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-[11px] font-mono px-2 py-0.5 border border-[var(--line-strong)] text-[var(--text-dim)] rounded-sm"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              {project.link && (
+                <a
+                  href={project.link.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-sm text-white hover:text-[var(--text-muted)] transition-colors mt-auto pt-2 inline-block"
+                  aria-label={`${project.link.label}: ${project.title}`}
+                >
+                  {project.link.label} ↗
+                </a>
+              )}
+              {project.demoLink && (
+                <a
+                  href={project.demoLink.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-sm text-white hover:text-[var(--text-muted)] transition-colors pt-1 inline-block"
+                  aria-label={`${project.demoLink.label}: ${project.title}`}
+                >
+                  {project.demoLink.label} ↗
+                </a>
+              )}
+            </article>
+          ))}
+        </div>
+
         {/* ── Human aside ── */}
         <p
           className="px-6 sm:px-8 py-5 text-[var(--text-muted)] text-sm border-x border-b border-[var(--line)] italic mt-px"
           style={{
-            opacity: grid2Visible ? 1 : 0,
+            opacity: grid3Visible ? 1 : 0,
             transition: "opacity 0.65s ease 300ms",
           }}
         >
