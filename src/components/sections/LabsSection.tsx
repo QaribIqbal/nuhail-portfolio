@@ -86,6 +86,7 @@ interface Project {
   description: React.ReactNode;
   tags: string[];
   link?: { label: string; href: string };
+  demoLink?: { label: string; href: string };
   image?: { src: string; alt: string };
 }
 
@@ -98,6 +99,7 @@ const featuredProjects: Project[] = [
       "The AI SEO operating system for agencies: keyword research, competitor analysis, AI article drafts, images, client approvals, and WordPress publishing in one system.",
     tags: ["AI SEO", "Keyword research", "WordPress"],
     link: { label: "View project", href: "https://geodash.ai/" },
+    demoLink: { label: "Watch demo", href: "https://youtu.be/4ITqJ0UWNVs" },
   },
   {
     num: "02",
@@ -106,6 +108,7 @@ const featuredProjects: Project[] = [
       "An AI calling workflow that identifies missed calls from integrated database records and initiates automated callbacks using VAPI.",
     tags: ["VAPI", "Voice agents", "Supabase"],
     link: { label: "View project", href: "https://admin.edmnexus.ai/" },
+    demoLink: { label: "Watch demo", href: "https://youtu.be/8fhhPkKQ67o" },
   },
 ];
 
@@ -169,6 +172,7 @@ const smallProjects: Project[] = [
       "A RAG support chatbot in n8n: the retrieval pipeline answers questions from a Pinecone vector store, and the ingestion pipeline loads the knowledge base. OpenRouter model, HuggingFace embeddings, 10-message memory.",
     tags: ["n8n", "RAG", "Pinecone"],
     link: { label: "View project", href: "https://github.com/NuhailIqbal/chatbot-hub" },
+    demoLink: { label: "Watch demo", href: "https://youtu.be/vbiD_IE2NfM" },
     image: {
       src: "https://raw.githubusercontent.com/NuhailIqbal/chatbot-hub/main/docs/workflow.png",
       alt: "ChatBot Hub n8n workflow — retrieval pipeline with Pinecone vector store and ingestion pipeline",
@@ -332,6 +336,17 @@ export const LabsSection: React.FC = () => {
                     {project.link.label} ↗
                   </a>
                 )}
+                {project.demoLink && (
+                  <a
+                    href={project.demoLink.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-base text-white hover:text-[var(--text-muted)] transition-colors pt-1 inline-block"
+                    aria-label={`${project.demoLink.label}: ${project.title}`}
+                  >
+                    {project.demoLink.label} ↗
+                  </a>
+                )}
               </div>
             </article>
           ))}
@@ -390,6 +405,17 @@ export const LabsSection: React.FC = () => {
                   aria-label={`Read the system: ${project.title}`}
                 >
                   Read the system →
+                </a>
+              )}
+              {project.demoLink && (
+                <a
+                  href={project.demoLink.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-sm text-white hover:text-[var(--text-muted)] transition-colors pt-1 inline-block"
+                  aria-label={`${project.demoLink.label}: ${project.title}`}
+                >
+                  {project.demoLink.label} ↗
                 </a>
               )}
             </article>
